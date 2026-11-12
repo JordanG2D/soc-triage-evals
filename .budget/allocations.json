@@ -1,5 +1,12 @@
 {
   "schema_version": 1,
   "cap_microdollars": 20000000,
-  "allocations": []
+  "allocations": [
+    {
+      "run_id": "43306449652:1",
+      "microdollars": 5000000,
+      "source_commit": "79e69aa536c8d33ebbe90f74ca5b0267ff04c8af",
+      "allocated_at": "2026-11-12T21:04:00.135205+00:00"
+    }
+  ]
 }
