@@ -17,6 +17,7 @@ from .reporting import build_report, write_report
 from .inspect_task import run_live_task_sync
 from .scoring import score_case
 from .statistics import paired_family_bootstrap
+from .structured_output import output_contract_metadata
 
 REPOSITORY = "JordanG2D/soc-triage-evals"
 
@@ -68,6 +69,7 @@ def run_live_slice(args) -> int:
     records = []
     model_scores = {}
     model_reports = {}
+    contract = output_contract_metadata()
     alerts = _load_directory(args.data_dir / "alerts", "id")
     if len(alerts) != 16:
         raise ValueError("Only the 16-alert development slice is authorized")
@@ -94,7 +96,7 @@ def run_live_slice(args) -> int:
                     for generation in result["generations"] for usage in [generation["usage"]]
                 )
                 estimate = estimated_standard_cost(result)
-                record = {"alert": alert, "result": result, "provenance": {"execution_mode": "live_model", "run_id": lease["run_id"], "source_commit": lease["source_commit"], "journal_commit": lease["journal_commit"], "model": model, "prompt_version": "v1", "timestamp": datetime.now(timezone.utc).isoformat(), "end_to_end_response_latency_seconds": elapsed, "latency_scope": "Wall time for all provider generations, local tool execution, and parsing for this alert.", "estimated_standard_cost_usd": estimate, "cost_upper_microdollars": accounting, "input_sha256": hashes}}
+                record = {"alert": alert, "result": result, "provenance": {"execution_mode": "live_model", "run_id": lease["run_id"], "source_commit": lease["source_commit"], "journal_commit": lease["journal_commit"], "model": model, "prompt_version": "v1", "output_contract": contract, "timestamp": datetime.now(timezone.utc).isoformat(), "end_to_end_response_latency_seconds": elapsed, "latency_scope": "Wall time for all provider generations, local tool execution, and parsing for this alert.", "estimated_standard_cost_usd": estimate, "cost_upper_microdollars": accounting, "input_sha256": hashes}}
                 records.append(record)
                 with (args.output / "records.jsonl").open("a") as stream:
                     stream.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -103,7 +105,7 @@ def run_live_slice(args) -> int:
                 scores.append(score)
                 print(json.dumps({"model": model, "alert": alert_id, "completed": len(records), "parse_ok": result["decision"] is not None}), flush=True)
             selected = [r for r in records if r["result"]["model"] == model]
-            metadata = {"model": model, "prompt_version": "v1", "source_commit": lease["source_commit"], "run_id": lease["run_id"], "estimated_standard_cost_usd": sum(r["provenance"]["estimated_standard_cost_usd"] for r in selected), "end_to_end_response_latency_seconds": [r["provenance"]["end_to_end_response_latency_seconds"] for r in selected], "latency_scope": "Wall time for all provider generations, local tool execution, and parsing per alert; not isolated generation latency.", "billing": "Token-based standard-price estimate; invoice not retrieved. Conservative budget ledger separately charges a higher ceiling.", "budget": ledger.snapshot()}
+            metadata = {"model": model, "prompt_version": "v1", "output_contract": contract, "source_commit": lease["source_commit"], "run_id": lease["run_id"], "estimated_standard_cost_usd": sum(r["provenance"]["estimated_standard_cost_usd"] for r in selected), "end_to_end_response_latency_seconds": [r["provenance"]["end_to_end_response_latency_seconds"] for r in selected], "latency_scope": "Wall time for all provider generations, local tool execution, and parsing per alert; not isolated generation latency.", "billing": "Token-based standard-price estimate; invoice not retrieved. Conservative budget ledger separately charges a higher ceiling.", "budget": ledger.snapshot()}
             model_scores[model] = scores
             model_reports[model] = build_report(scores, execution_mode="live_model", metadata=metadata)
             write_report(model_reports[model], args.output / model.split("/")[0])

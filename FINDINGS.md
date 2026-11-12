@@ -1,5 +1,7 @@
 # Live development vertical slice
 
+> Investigation update before the repair run: the first run used prompt-only JSON instructions for both providers. Haiku's 16 parse failures do not establish 16 investigation errors. GPT-6 Luna's 16/16 agreement on 16 authored DEV cases is not evidence of quality; the full frozen test and faithfulness calibration are still needed. The $0.187791765 estimate below covers recorded triage generations and excludes unresolved automatic OpenAI probe usage. Original evidence is preserved. See [the raw-response audit](docs/format-investigation-run1.md) and [the declared repair protocol](docs/STRUCTURED_OUTPUT.md). A same-slice native-schema rerun is authorized; no dataset expansion is underway.
+
 The first live slice completed on 2026-11-12: **16 synthetic development alerts × two models × prompt v1 = 32 actual responses**, with native Inspect JSON logs and no automatic retries. [The live workflow succeeded](https://github.com/JordanG2D/soc-triage-evals/actions/runs/43306449652); the free regression workflow also passed all 130 tests and the native 16-case recorded task.
 
 GPT-6 Luna satisfied the strict JSON contract on all 16 cases and matched all expected triage actions and severities. Haiku returned Markdown-wrapped answers on all 16 cases and therefore failed the exact-one-JSON-object contract. Its zero action/severity/technique scores include those parsing failures; the parser never reached schema validation. No answer was repaired, extracted, retried for quality, or rescored.

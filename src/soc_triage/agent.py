@@ -5,17 +5,19 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import asdict, dataclass, field
 import json
+import hashlib
 from typing import Any, Protocol, Sequence
 
 from inspect_ai.model import (
     ChatMessage, ChatMessageAssistant, ChatMessageSystem, ChatMessageUser,
-    GenerateConfig, ModelOutput, execute_tools, get_model,
+    GenerateConfig, ModelOutput, ResponseSchema, execute_tools, get_model,
 )
 from inspect_ai.tool import Tool, ToolCall, ToolDef
 
 from .prompts import SYSTEM_PROMPT, alert_prompt
 from .schema import Alert, parse_decision
 from .tools import ToolEnvironment
+from .structured_output import SCHEMA_NAME, canonical_json, common_decision_schema, output_contract_metadata
 
 MAX_TOOL_CALLS = 6
 MAX_GENERATION_TURNS = 5
@@ -89,13 +91,28 @@ class LiveInspectAdapter:
             raise ValueError("Live generation requires a persistent budget ledger")
         self.model_name = model
         self.budget = budget
+        self.response_schema = ResponseSchema(
+            name=SCHEMA_NAME, json_schema=common_decision_schema(), strict=True,
+        )
+        self.provider_extra_body = (
+            {"output_config": {"format": {"type": "json_schema", "schema": common_decision_schema()}}}
+            if model.startswith("anthropic/") else {}
+        )
         self.config = GenerateConfig(
             max_tokens=MAX_OUTPUT_TOKENS, max_retries=0, parallel_tool_calls=False,
             reasoning_effort="none" if model.startswith("openai/") else None,
+            reasoning_summary="none" if model.startswith("openai/") else None,
+            response_schema=self.response_schema if model.startswith("openai/") else None,
         )
+        self.last_request_contract: dict | None = None
         model_args: dict[str, Any] = {"max_retries": 0, "streaming": False}
         if model.startswith("openai/"):
             model_args.update(responses_api=True, responses_store=False, service_tier="default")
+        else:
+            # Pinned Inspect's response_schema converter modifies scalar schema
+            # nodes. Its provider-level extra_body reaches the current native
+            # Messages format directly and preserves the shared grammar bytes.
+            model_args["extra_body"] = self.provider_extra_body
         self._model = get_model(model, config=self.config, memoize=False, **model_args)
 
     async def generate(self, messages: list[ChatMessage], tools: Sequence[Tool], tool_choice: str) -> ModelOutput:
@@ -111,7 +128,27 @@ class LiveInspectAdapter:
                 }
                 for definition in (ToolDef(tool) for tool in tools)
             ],
+            "response_schema": self.response_schema.model_dump(mode="json", by_alias=True, exclude_none=True),
+            "provider_extra_body": self.provider_extra_body,
+            "provider_format_metadata": {
+                "type": "json_schema",
+                **({"name": SCHEMA_NAME, "description": SCHEMA_NAME, "strict": True}
+                   if self.model_name.startswith("openai/") else {}),
+            },
         }
+        contract = output_contract_metadata()
+        contract.pop("schema")
+        contract["message_text_sha256"] = hashlib.sha256(canonical_json([
+            {"role": message.role, "content": message.model_dump(mode="json")["content"]}
+            for message in messages
+        ]).encode("utf-8")).hexdigest()
+        contract["message_text_hash_scope"] = "role/content projection; excludes tool-call arguments and request headers"
+        contract["tool_choice"] = tool_choice
+        contract["provider_schema_route"] = (
+            "responses.text.format" if self.model_name.startswith("openai/")
+            else "messages.output_config.format"
+        )
+        self.last_request_contract = contract
         bound = len(json.dumps(payload, ensure_ascii=False).encode("utf-8")) + 8192
         if bound > 100_000:
             raise ValueError("Conservative request bound exceeds the configured input budget")
@@ -162,6 +199,7 @@ async def run_agent(alert: Alert | dict, adapter: Adapter, environment: ToolEnvi
             "requested_model": adapter.model_name, "returned_model": output.model,
             "stop_reason": output.stop_reason,
             "usage": output.usage.model_dump(mode="json") if output.usage else None,
+            "request_contract": deepcopy(getattr(adapter, "last_request_contract", None)),
         })
         messages.append(output.message)
         calls = output.message.tool_calls or []

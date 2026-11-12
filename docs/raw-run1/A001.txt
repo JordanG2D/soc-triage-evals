@@ -1,0 +1,23 @@
+## Analysis
+
+**Alert Summary:**
+The alert detected a large outbound archive transfer (268 MB) from host `backup-01` via HTTPS to IP `203.0.113.58` using the signed `backup-agent.exe` process under the service account `svc-backup01`.
+
+**Evidence Review:**
+
+1. **Host Context (host:backup-01):** Change approval CHG-1010 explicitly authorizes backup-job-10 using backup-agent.exe to destination 203.0.113.58 at the alert timestamp. The observed transfer size (268 MB) falls within the expected 200–300 MiB range for this job.
+
+2. **User Context (user:svc-backup01):** This is a noninteractive service identity configured specifically for backup-job-10, consistent with an automated scheduled backup.
+
+3. **Process Integrity:** The backup-agent.exe binary is signed with valid signature, running under its parent service-manager, indicating legitimate execution.
+
+4. **Network Characteristics:** HTTPS protocol, encrypted content (backup archive), completed transfer status, and a well-formed job ID all align with standard backup operations.
+
+5. **IP Reputation (ip:203.0.113.58):** The destination is the configured backup service endpoint with no incident indicators in the offline fixture.
+
+**Conclusion:**
+All indicators point to legitimate, authorized scheduled backup activity. The change approval explicitly authorizes this exact operation, the service account and process are appropriate, and the transfer characteristics match baseline expectations.
+
+```json
+{"verdict":"benign","severity":4,"technique_id":null,"summary":"Authorized scheduled backup job (CHG-1010) transferring data to configured backup destination. Process is signed, user is noninteractive service account, transfer size within expected range, and destination has no incident indicators.","evidence":[{"source_id":"host:backup-01","fact":"CHG-1010 approves backup-job-10 using backup-agent.exe to 203.0.113.58 at alert timestamp"},{"source_id":"host:backup-01","fact":"Observed transfer size 268 MB is within recorded 200–300 MiB expected range"},{"source_id":"user:svc-backup01","fact":"svc-backup01 is noninteractive identity for backup-job-10"},{"source_id":"alert:A001","fact":"backup-agent.exe process is signed with valid signature"},{"source_id":"alert:A001","fact":"Transfer completed via HTTPS with encrypted backup archive contents"},{"source_id":"ip:203.0.113.58","fact":"Destination is configured backup service endpoint with no incident indicators"}]}
+```

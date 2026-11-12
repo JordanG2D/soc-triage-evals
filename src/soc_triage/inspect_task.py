@@ -17,6 +17,7 @@ from .prompts import alert_prompt
 from .retrieval import LocalRunbookIndex
 from .schema import Alert
 from .tools import ToolEnvironment
+from .structured_output import output_contract_metadata
 
 
 @solver
@@ -123,7 +124,7 @@ def run_live_task_sync(
         dataset=[Sample(id=packet.id, input=alert_prompt(packet), metadata={"alert": packet.model_dump()}) for packet in packets],
         solver=bounded_live(), scorer=triage_score(str(root / "references")),
         model="mockllm/model", message_limit=30,
-        metadata={"mode": "live_development", "condition": model, "prompt_version": "v1"},
+        metadata={"mode": "live_development", "condition": model, "prompt_version": "v1", "output_contract": output_contract_metadata()},
     )
     logs = eval(
         task_instance, log_dir=log_dir, log_format="json", display="none",

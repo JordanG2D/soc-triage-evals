@@ -1,0 +1,42 @@
+```json
+{
+  "verdict": "needs_escalation",
+  "severity": 2,
+  "technique_id": null,
+  "summary": "75 authentication failures across 25 distinct accounts from a shared egress IP (browser-isolation service) within 15 minutes cannot be attributed to a specific attacker or authorized activity. Client identifiers were not retained in the aggregation, preventing attribution to individual users or sessions. No successful authentications occurred in the window. The approved egress address does not establish that each attempt was authorized. Client-level records and session details are required to distinguish between credential spraying, password testing, legitimate bulk access, or misconfiguration.",
+  "evidence": [
+    {
+      "source_id": "alert:A015",
+      "fact": "75 failed authentication attempts across 25 distinct accounts in 15-minute window via HTTPS sign-in protocol"
+    },
+    {
+      "source_id": "alert:A015",
+      "fact": "No successful authentications recorded; no candidate password count retained"
+    },
+    {
+      "source_id": "alert:A015",
+      "fact": "Client identifiers were not retained (client_identifiers_retained: false)"
+    },
+    {
+      "source_id": "ip:203.0.113.45",
+      "fact": "Source IP is a shared egress point used by an approved browser-isolation service"
+    },
+    {
+      "source_id": "ip:203.0.113.45",
+      "fact": "Reputation record has no per-client session mapping and cannot identify the originator of sign-in attempts"
+    },
+    {
+      "source_id": "host:auth-15",
+      "fact": "Identity gateway did not retain client identifiers in this source-address aggregate"
+    },
+    {
+      "source_id": "RB06",
+      "fact": "Runbook guidance: repeated failure alone does not establish credential spraying pattern without password candidate cardinality"
+    },
+    {
+      "source_id": "RB07",
+      "fact": "Runbook guidance: approved egress address does not prove each action was approved; client-level records required when aggregation lacks client identifiers"
+    }
+  ]
+}
+```
