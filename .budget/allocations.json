@@ -7,6 +7,12 @@
       "microdollars": 5000000,
       "source_commit": "79e69aa536c8d33ebbe90f74ca5b0267ff04c8af",
       "allocated_at": "2026-11-12T21:04:00.135205+00:00"
+    },
+    {
+      "run_id": "43332755718:1",
+      "microdollars": 5000000,
+      "source_commit": "dc63b6897e4d286a8c7a318097e428ec999fa642",
+      "allocated_at": "2026-11-12T23:55:01.165269+00:00"
     }
   ]
 }
