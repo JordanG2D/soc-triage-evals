@@ -1,0 +1,22 @@
+{
+  "run_id": "43306449652:1",
+  "run_url": "https://github.com/JordanG2D/soc-triage-evals/actions/runs/43306449652",
+  "execution_mode": "live_model",
+  "scope": "16 synthetic DEV alerts per model, prompt v1; no frozen test or judge labels",
+  "source_commit": "79e69aa536c8d33ebbe90f74ca5b0267ff04c8af",
+  "journal_commit": "226e9ba6a60349fb5ad5de35e5da069cc1f11df6",
+  "human_labels": "all20blank",
+  "files": {
+    "anthropic/FINDINGS.md": "aadf8ebd011bf573f4227500dc4d1bd598fa1d47c0f946b66561487c9a461333",
+    "anthropic/report.json": "19affdfb2c76578dba5b2f7e021f74c4c8d31da3a8824e6a4c028d35a62d064f",
+    "budget.json": "98875e04f71182807d4f0f6127857e8233866ecb84256664f85f1d9d65bdd8a6",
+    "human-calibration.json": "80715635c154cbc9014af281c4ce1483dbe3f1d1e5d84582e7b98b95ed62c333",
+    "inspect/anthropic/2026-11-12T21-06-34-00-00_task_PLkYHSqbsbotbyXsYB3SFL.json": "18b870cf15c1ca0bac45f308f73d415cd3ea0c350547ed71fcd0471fa1b7859e",
+    "inspect/openai/2026-11-12T21-04-03-00-00_task_fDYzbPau6YAzyfVxBnrLJE.json": "46dc44de353e712ac26c06f793263a04c2ac377f62adfa1cdc5063cbc1df0678",
+    "label-20-responses.html": "621729a4c8026a7c06df980b9411b16387c5b3335b3e8f8968cc8c66399114de",
+    "openai/FINDINGS.md": "0e07848d566dc0ef82f92fb68af0a3a4f82aca78ae25ca783d0efb72cfc3ab25",
+    "openai/report.json": "8172889f0550fdc2ea8da2ec6a6b8eec785cc73c5e5bce81dbe990697853949e",
+    "paired-dev-comparison.json": "d1b560f8b66bd22d94422be8a55ba29acb2b8e0472acb0a425aba122ab86eeba",
+    "records.jsonl": "9221fa6dd5393b48e52305233e04d74fe1d7b5988fcd34e39a489f649ebd7260"
+  }
+}

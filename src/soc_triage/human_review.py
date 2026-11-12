@@ -55,7 +55,11 @@ function display(index) {
   byId("tools").textContent = response.observed_tools.length
     ? JSON.stringify(response.observed_tools, null, 2)
     : "No tools were observed for this response. Use the alert and final response only.";
-  byId("final").textContent = response.final_response;
+  try {
+    byId("final").textContent = JSON.stringify(JSON.parse(response.final_response), null, 2);
+  } catch {
+    byId("final").textContent = response.final_response;
+  }
   byId("source-hash").textContent = response.source_sha256;
   byId("material-hash").textContent = response.displayed_material_sha256;
   for (const choice of choices) {
@@ -67,21 +71,26 @@ function display(index) {
   byId("next").disabled = index === pack.responses.length - 1;
   updateProgress();
 }
+function navigate(index) {
+  persist();
+  display(index);
+  byId("response-title").scrollIntoView({ behavior: "auto", block: "start" });
+}
 byId("rubric").textContent = pack.rubric;
 for (let index = 0; index < pack.responses.length; index++) {
   const button = document.createElement("button");
   button.type = "button";
   button.dataset.index = String(index);
   button.textContent = String(index + 1);
-  button.addEventListener("click", () => { persist(); display(index); });
+  button.addEventListener("click", () => navigate(index));
   byId("response-list").append(button);
 }
 for (const choice of choices) choice.addEventListener("change", persist);
 byId("reason").addEventListener("input", persist);
 byId("unsupported").addEventListener("input", persist);
 byId("reviewer").addEventListener("input", updateProgress);
-byId("previous").addEventListener("click", () => { persist(); if (current > 0) display(current - 1); });
-byId("next").addEventListener("click", () => { persist(); if (current < 19) display(current + 1); });
+byId("previous").addEventListener("click", () => { if (current > 0) navigate(current - 1); });
+byId("next").addEventListener("click", () => { if (current < 19) navigate(current + 1); });
 byId("download").addEventListener("click", () => {
   persist();
   const reviewer = byId("reviewer").value.trim();
@@ -178,6 +187,8 @@ def export_human_html(pack: Mapping[str, Any] | str | Path, destination: str | P
         ids.add(response_id)
         if response["human_label"] != {"faithful": None, "reason": "", "unsupported_claims": []}:
             raise ValueError("human reviewer export accepts blank labels only")
+        if not isinstance(response["alert"], Mapping) or not isinstance(response["observed_tools"], list) or not isinstance(response["final_response"], str):
+            raise ValueError("review response must preserve its alert, observed tools, and final text")
         view = {key: response[key] for key in ("alert", "observed_tools", "final_response")}
         if canonical_sha256(view) != response["displayed_material_sha256"]:
             raise ValueError(f"displayed source material changed for {response_id}")

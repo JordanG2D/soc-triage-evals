@@ -2,7 +2,7 @@
 
 A small security-alert triage agent and an Inspect AI evaluation suite, built from original synthetic material as a public AI engineering portfolio project. Python 3.12, MIT license.
 
-**Current scope:** a 16-alert development vertical slice with four deterministic tools, 30 original runbooks, local semantic retrieval, structured decisions, scoring, reports, and regression checks. A live development run is pending. The faithfulness judge remains uncalibrated until the human owner labels 20 actual responses. Full dataset expansion and the frozen comparison have not started.
+**Current scope:** a 16-alert development vertical slice with four deterministic tools, 30 original runbooks, local semantic retrieval, structured decisions, scoring, reports, and regression checks. The first live development run completed with 32 actual responses. The faithfulness judge remains uncalibrated until the human owner labels the 20-response review pack. Full dataset expansion and the frozen comparison have not started.
 
 ```mermaid
 flowchart LR
@@ -24,6 +24,8 @@ bash scripts/evaluate.sh
 ```
 
 The first setup downloads checksum-pinned, MIT-licensed [Model2Vec weights](https://huggingface.co/minishlab/potion-base-2M) from a fixed revision. Evaluation then uses local files with network access disabled for the embedding library. No provider key is needed for the offline suite. Outputs are in `artifacts/offline/` and native Inspect JSON logs in `artifacts/recorded/inspect/`. Tested compatibility pins and the JSON log-format choice are documented in [runtime compatibility](docs/DEPENDENCIES.md).
+
+The first live run found 16/16 valid JSON outputs and correct triage actions for GPT-6 Luna, and 0/16 valid outputs for Haiku because every answer used Markdown wrappers. The total token-cost estimate was **$0.19**. These are small DEV results; see [FINDINGS.md](FINDINGS.md) for denominators, failure analysis, costs, latency, and paired intervals. The [20-response human review pack](evidence/vertical-slice-2026-11-12/human-calibration.json) has all labels blank.
 
 Offline fixtures exercise all four real tool implementations and the scoring pipeline. Their perfect target-label matches are prewritten expectations and carry **no claim about model performance**. See [FINDINGS.md](FINDINGS.md), [DATASET.md](DATASET.md), and the committed [fixture baseline](baselines/offline.json).
 

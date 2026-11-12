@@ -1,0 +1,40 @@
+{
+  "status": "observed_dev_comparison",
+  "scope": "Exploratory paired model comparison on the same 16 synthetic DEV alerts (32 actual responses); not the frozen comparison.",
+  "baseline_model": "openai/gpt-6-luna",
+  "candidate_model": "anthropic/claude-haiku-4-5-20251001",
+  "metrics": {
+    "error_cost": {
+      "metric": "error_cost",
+      "difference_direction": "candidate_minus_baseline",
+      "mean_difference": 9.875,
+      "confidence_level": 0.95,
+      "interval": [
+        9.625,
+        10.0
+      ],
+      "case_count": 16,
+      "family_count": 8,
+      "resamples": 2000,
+      "seed": 1729,
+      "method": "paired percentile bootstrap resampling whole alert families",
+      "limitations": "Exploratory DEV uncertainty; few synthetic families, no operational or frozen-test inference."
+    },
+    "verdict_correct": {
+      "metric": "verdict_correct",
+      "difference_direction": "candidate_minus_baseline",
+      "mean_difference": -1.0,
+      "confidence_level": 0.95,
+      "interval": [
+        -1.0,
+        -1.0
+      ],
+      "case_count": 16,
+      "family_count": 8,
+      "resamples": 2000,
+      "seed": 1729,
+      "method": "paired percentile bootstrap resampling whole alert families",
+      "limitations": "Exploratory DEV uncertainty; few synthetic families, no operational or frozen-test inference."
+    }
+  }
+}

@@ -72,6 +72,7 @@ def findings_markdown(report: Mapping[str, Any]) -> str:
         f"| False-benign decisions on malicious events | {metrics['false_benign_on_malicious_count']} / {metrics['malicious_case_count']} |",
         f"| Invalid outputs | {metrics['invalid_output_count']} |",
         f"| Exact / within-one severity accuracy | {metrics['severity_exact_accuracy']:.3f} / {metrics['severity_within_one_accuracy']:.3f} |",
+        f"| Exactly off-by-one severity rate | {metrics['severity_within_one_accuracy'] - metrics['severity_exact_accuracy']:.3f} |",
         f"| Severity MAE (valid denominator) | {mae if mae is not None else 'unavailable'} ({metrics['severity_mae_valid_count']}) |",
         f"| Acceptable ATT&CK technique accuracy | {metrics['technique_accuracy']:.3f} |",
         f"| Mean required-tool alternative coverage | {metrics['mean_tool_requirement_coverage']:.3f} |",

@@ -53,3 +53,4 @@ jobs:
             .state/
           if-no-files-found: error
           retention-days: 90
+          include-hidden-files: true
