@@ -1,0 +1,41 @@
+{
+  "alert_id": "A008",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A008-F1",
+      "fact": "A package agent downloaded a signed update to its package cache.",
+      "supporting_ids": [
+        "alert:A008"
+      ]
+    },
+    {
+      "id": "A008-F2",
+      "fact": "CHG-1016 matches the job, path, signer and time, and the file hash matches the signed manifest.",
+      "supporting_ids": [
+        "host:build-08"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "ip_reputation",
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Approved distribution address alone is insufficient; matching manifest and job authorization establish this package operation.",
+  "family_id": "external-file-transfer"
+}

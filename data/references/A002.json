@@ -1,0 +1,50 @@
+{
+  "alert_id": "A002",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1110.003"
+  ],
+  "required_facts": [
+    {
+      "id": "A002-F1",
+      "fact": "One password candidate was attempted across 40 accounts with 119 failures and one successful account.",
+      "supporting_ids": [
+        "alert:A002"
+      ]
+    },
+    {
+      "id": "A002-F2",
+      "fact": "A second gateway observed the same address using one password candidate across 28 accounts outside authorized testing.",
+      "supporting_ids": [
+        "ip:203.0.113.84"
+      ]
+    },
+    {
+      "id": "A002-F3",
+      "fact": "The account owner did not initiate the successful session.",
+      "supporting_ids": [
+        "user:support02"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "ip_reputation"
+      ],
+      [
+        "user_context"
+      ]
+    ],
+    "optional": [
+      "runbook_search",
+      "host_context"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "The retained candidate count supports password spraying rather than generic repeated authentication failure. Do not claim the password was disclosed.",
+  "family_id": "auth-fanout"
+}

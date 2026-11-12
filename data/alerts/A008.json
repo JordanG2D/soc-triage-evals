@@ -1,0 +1,28 @@
+{
+  "id": "A008",
+  "family_id": "external-file-transfer",
+  "source": "endpoint_sensor",
+  "rule": "External executable transfer",
+  "host": "build-08",
+  "user": "svc-package08",
+  "source_ip": "198.51.100.46",
+  "destination_ip": "192.0.2.54",
+  "process": {
+    "name": "file-transfer-client.exe",
+    "command_line": "[transfer metadata; no executable command retained]",
+    "parent": "package-agent.exe"
+  },
+  "timestamp": "2026-11-10T10:08:00Z",
+  "event": {
+    "event_type": "file_download",
+    "source_domain": "packages-16.example.invalid",
+    "output_path": "C:\\ProgramData\\PackageCache\\compiler-update.bin",
+    "file_signed": true,
+    "signature_valid": true,
+    "signer": "Example Package Publisher",
+    "file_type": "Portable executable",
+    "transfer_result": "completed",
+    "file_executed": false,
+    "bytes_received": 786432
+  }
+}

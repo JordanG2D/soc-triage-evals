@@ -1,0 +1,42 @@
+{
+  "alert_id": "A006",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A006-F1",
+      "fact": "The task uses the signed PackageService update path and runs daily as SYSTEM.",
+      "supporting_ids": [
+        "alert:A006"
+      ]
+    },
+    {
+      "id": "A006-F2",
+      "fact": "CHG-1008 matches the task name, path, principal, schedule and registration window.",
+      "supporting_ids": [
+        "host:ws-06"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "A scheduled task can be normal maintenance. Require matching change scope rather than a trusted-looking task name.",
+  "family_id": "scheduled-task-write"
+}

@@ -1,0 +1,42 @@
+{
+  "alert_id": "A004",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1059.001"
+  ],
+  "required_facts": [
+    {
+      "id": "A004-F1",
+      "fact": "PowerShell launched from a document application and started an unsigned child from Downloads.",
+      "supporting_ids": [
+        "alert:A004"
+      ]
+    },
+    {
+      "id": "A004-F2",
+      "fact": "The PowerShell activity opened a remote-control channel and the user did not authorize it.",
+      "supporting_ids": [
+        "alert:A004",
+        "user:analyst04"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "user_context"
+      ]
+    ],
+    "optional": [
+      "host_context",
+      "ip_reputation",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Primary observed behavior is PowerShell execution. No inference that encoding or PowerShell alone establishes an attack.",
+  "family_id": "powershell-process"
+}

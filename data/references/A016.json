@@ -1,0 +1,42 @@
+{
+  "alert_id": "A016",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A016-F1",
+      "fact": "The signed upgrader stopped protection without disabling automatic startup.",
+      "supporting_ids": [
+        "alert:A016"
+      ]
+    },
+    {
+      "id": "A016-F2",
+      "fact": "CHG-1014 matches the upgrade and the signed replacement, running service and sensor heartbeat were restored two minutes later.",
+      "supporting_ids": [
+        "host:app-16"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "A service stop requires the maintenance and recovery context; the signed upgrader name alone is insufficient.",
+  "family_id": "security-service-state"
+}

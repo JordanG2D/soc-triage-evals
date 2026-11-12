@@ -1,0 +1,42 @@
+{
+  "alert_id": "A003",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A003-F1",
+      "fact": "The observed signed health tool requested only limited process information and did not create a dump.",
+      "supporting_ids": [
+        "alert:A003"
+      ]
+    },
+    {
+      "id": "A003-F2",
+      "fact": "The installed tool and metadata-only health configuration match the host inventory.",
+      "supporting_ids": [
+        "host:ws-03"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "Process metadata access is not LSASS memory dumping. Null mapping reflects absent observed adversarial credential-access behavior.",
+  "family_id": "process-memory-access"
+}

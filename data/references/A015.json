@@ -1,0 +1,41 @@
+{
+  "alert_id": "A015",
+  "event_truth": "unknown",
+  "expected_verdict": "needs_escalation",
+  "severity": 3,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A015-F1",
+      "fact": "The aggregate has no candidate-password or client identifier evidence, and no successful accounts.",
+      "supporting_ids": [
+        "alert:A015"
+      ]
+    },
+    {
+      "id": "A015-F2",
+      "fact": "The source is shared browser-isolation egress without a per-client mapping, leaving the origin and cause unresolved.",
+      "supporting_ids": [
+        "ip:203.0.113.45"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "ip_reputation"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "host_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Neither a source-address fanout nor shared egress proves spraying or authorized use. Request client-level authentication evidence before a definitive technique mapping.",
+  "family_id": "auth-fanout"
+}

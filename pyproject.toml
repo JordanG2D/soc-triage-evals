@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "soc-triage-evals"
+version = "0.1.0"
+description = "Synthetic SOC alert-triage agent and Inspect AI development evaluation"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+dependencies = [
+  "inspect-ai==0.3.287",
+  "agent-client-protocol==0.12.0",
+  "model2vec==0.10.0",
+  "openai>=3.50,<4",
+  "anthropic>=2,<3",
+  "numpy>=2.4,<3",
+  "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.4,<9"]
+
+[project.scripts]
+soc-triage = "soc_triage.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/soc_triage"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,26 @@
+{
+  "id": "A006",
+  "family_id": "scheduled-task-write",
+  "source": "endpoint_sensor",
+  "rule": "Recurring scheduled task created",
+  "host": "ws-06",
+  "user": "svc-update06",
+  "source_ip": "192.0.2.86",
+  "destination_ip": "192.0.2.42",
+  "process": {
+    "name": "task-registration-client.exe",
+    "command_line": "[task registration metadata; no executable command retained]",
+    "parent": "update-agent.exe"
+  },
+  "timestamp": "2026-11-10T10:06:00Z",
+  "event": {
+    "event_type": "task_registered",
+    "task_name": "PackageMaintenance",
+    "task_action_path": "C:\\Program Files\\PackageService\\update.exe",
+    "task_action_signed": true,
+    "signature_valid": true,
+    "trigger": "daily at 11:00 UTC",
+    "run_as": "SYSTEM",
+    "registration_result": "success"
+  }
+}

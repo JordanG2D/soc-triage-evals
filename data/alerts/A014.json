@@ -1,0 +1,26 @@
+{
+  "id": "A014",
+  "family_id": "scheduled-task-write",
+  "source": "endpoint_sensor",
+  "rule": "Recurring scheduled task created",
+  "host": "ws-14",
+  "user": "staff14",
+  "source_ip": "192.0.2.39",
+  "destination_ip": "192.0.2.92",
+  "process": {
+    "name": "task-registration-client.exe",
+    "command_line": "[task registration metadata; no executable command retained]",
+    "parent": "remote-shell.exe"
+  },
+  "timestamp": "2026-11-10T10:14:00Z",
+  "event": {
+    "event_type": "task_registered",
+    "task_name": "DailyStatus",
+    "task_action_path": "C:\\Users\\staff14\\AppData\\Local\\Temp\\status-worker.exe",
+    "task_action_signed": false,
+    "trigger": "every 5 minutes",
+    "run_as": "SYSTEM",
+    "registration_result": "success",
+    "task_action_executed": true
+  }
+}

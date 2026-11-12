@@ -1,0 +1,38 @@
+{
+  "alert_id": "A011",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A011-F1",
+      "fact": "The signed inventory script, account, host and destination match approved CHG-1002 in the alert window.",
+      "supporting_ids": [
+        "alert:A011"
+      ]
+    },
+    {
+      "id": "A011-F2",
+      "fact": "Observed script actions are application inventory and delivery to the matching inventory destination.",
+      "supporting_ids": [
+        "alert:A011"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [],
+    "optional": [],
+    "forbidden": [
+      "ip_reputation",
+      "user_context",
+      "host_context",
+      "runbook_search"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "Self-contained authorized inventory record. Enrichment or retrieval is unnecessary; signatures alone would not suffice without the matching authorization record.",
+  "family_id": "powershell-process"
+}

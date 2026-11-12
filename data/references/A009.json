@@ -1,0 +1,42 @@
+{
+  "alert_id": "A009",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 1,
+  "acceptable_technique_ids": [
+    "T1003.001"
+  ],
+  "required_facts": [
+    {
+      "id": "A009-F1",
+      "fact": "An unsigned Downloads process obtained LSASS memory-read access and wrote a 50 MiB dump file.",
+      "supporting_ids": [
+        "alert:A009"
+      ]
+    },
+    {
+      "id": "A009-F2",
+      "fact": "The host is a critical identity server and neither the tool nor a memory-capture change is approved.",
+      "supporting_ids": [
+        "host:directory-09"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "Critical credential exposure with completed memory capture meets severity 1. No stolen credential values or later credential use are asserted.",
+  "family_id": "process-memory-access"
+}

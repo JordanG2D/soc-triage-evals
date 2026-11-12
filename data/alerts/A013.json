@@ -1,0 +1,26 @@
+{
+  "id": "A013",
+  "family_id": "external-file-transfer",
+  "source": "endpoint_sensor",
+  "rule": "External executable transfer",
+  "host": "build-13",
+  "user": "developer13",
+  "source_ip": "203.0.113.36",
+  "destination_ip": "192.0.2.19",
+  "process": {
+    "name": "file-transfer-client.exe",
+    "command_line": "[transfer metadata; no executable command retained]",
+    "parent": "remote-agent.exe"
+  },
+  "timestamp": "2026-11-10T10:13:00Z",
+  "event": {
+    "event_type": "file_download",
+    "source_domain": "packages-15.example.invalid",
+    "output_path": "C:\\Users\\developer13\\Downloads\\operator-kit.bin",
+    "file_signed": false,
+    "file_type": "Portable executable",
+    "transfer_result": "completed",
+    "file_executed": false,
+    "bytes_received": 786432
+  }
+}

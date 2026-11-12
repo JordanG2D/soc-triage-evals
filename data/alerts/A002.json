@@ -1,0 +1,29 @@
+{
+  "id": "A002",
+  "family_id": "auth-fanout",
+  "source": "identity_gateway",
+  "rule": "Authentication failures across accounts",
+  "host": "auth-02",
+  "user": "support02",
+  "source_ip": "203.0.113.84",
+  "destination_ip": "192.0.2.44",
+  "process": {
+    "name": "identity-gateway",
+    "command_line": "not applicable: authentication log",
+    "parent": "service-manager"
+  },
+  "timestamp": "2026-11-10T10:02:00Z",
+  "event": {
+    "event_type": "authentication_summary",
+    "window_minutes": 12,
+    "distinct_accounts": 40,
+    "failed_attempts": 119,
+    "candidate_password_count": 1,
+    "candidate_values_retained": false,
+    "successful_accounts": [
+      "support02"
+    ],
+    "successful_session_device": "unregistered-device-02",
+    "protocol": "HTTPS sign-in"
+  }
+}

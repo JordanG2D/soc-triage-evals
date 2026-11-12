@@ -1,0 +1,29 @@
+{
+  "id": "A012",
+  "family_id": "outbound-archive-stream",
+  "source": "network_sensor",
+  "rule": "Archive content on recurring outbound session",
+  "host": "records-api-12",
+  "user": "svc-records12",
+  "source_ip": "192.0.2.57",
+  "destination_ip": "198.51.100.27",
+  "process": {
+    "name": "session-worker.exe",
+    "command_line": "[sensor record; payload and command omitted]",
+    "parent": "service-manager"
+  },
+  "timestamp": "2026-11-10T10:12:00Z",
+  "event": {
+    "event_type": "outbound_transfer",
+    "protocol": "HTTPS",
+    "destination_domain": "relay-09.example.invalid",
+    "bytes_sent": 262144000,
+    "session_id": "session-09",
+    "earlier_same_session_observations": [
+      "Received remote operator commands",
+      "Sent command output"
+    ],
+    "content_inspection": "Archive containing synthetic restricted-record canaries",
+    "transfer_result": "completed"
+  }
+}

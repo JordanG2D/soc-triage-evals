@@ -1,0 +1,27 @@
+{
+  "id": "A001",
+  "family_id": "outbound-archive-stream",
+  "source": "network_sensor",
+  "rule": "Large archive upload",
+  "host": "backup-01",
+  "user": "svc-backup01",
+  "source_ip": "192.0.2.94",
+  "destination_ip": "203.0.113.58",
+  "process": {
+    "name": "backup-agent.exe",
+    "command_line": "[scheduled backup metadata]",
+    "parent": "service-manager"
+  },
+  "timestamp": "2026-11-10T10:01:00Z",
+  "event": {
+    "event_type": "outbound_transfer",
+    "protocol": "HTTPS",
+    "destination_domain": "backup-01.example.invalid",
+    "bytes_sent": 268435456,
+    "job_id": "backup-job-10",
+    "process_signed": true,
+    "signature_valid": true,
+    "content_inspection": "Encrypted backup archive; contents not inspected",
+    "transfer_result": "completed"
+  }
+}

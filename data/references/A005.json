@@ -1,0 +1,43 @@
+{
+  "alert_id": "A005",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1685"
+  ],
+  "required_facts": [
+    {
+      "id": "A005-F1",
+      "fact": "A remote-shell process tree stopped endpoint protection and disabled automatic startup; sensor heartbeats then stopped.",
+      "supporting_ids": [
+        "alert:A005",
+        "host:app-05"
+      ]
+    },
+    {
+      "id": "A005-F2",
+      "fact": "No matching protection maintenance exists and recovery is not recorded.",
+      "supporting_ids": [
+        "host:app-05"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "Uses the current MITRE Disable or Modify Tools identifier T1685, not historical T1562.001. Do not infer the later payload or recovery.",
+  "family_id": "security-service-state"
+}

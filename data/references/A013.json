@@ -1,0 +1,50 @@
+{
+  "alert_id": "A013",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1105"
+  ],
+  "required_facts": [
+    {
+      "id": "A013-F1",
+      "fact": "An unsigned executable was downloaded from an external endpoint and written to Downloads; execution is not observed.",
+      "supporting_ids": [
+        "alert:A013"
+      ]
+    },
+    {
+      "id": "A013-F2",
+      "fact": "The source delivered remote operator control messages before the transfer and is not an approved package source.",
+      "supporting_ids": [
+        "ip:203.0.113.36"
+      ]
+    },
+    {
+      "id": "A013-F3",
+      "fact": "The parent remote agent and file transfer are outside approved host inventory and changes.",
+      "supporting_ids": [
+        "host:build-13"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "ip_reputation"
+      ],
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Unauthorized tool transfer into a host is evidenced even though subsequent execution is not. Do not assert that the downloaded file executed.",
+  "family_id": "external-file-transfer"
+}

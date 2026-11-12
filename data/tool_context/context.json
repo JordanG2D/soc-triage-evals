@@ -1,0 +1,583 @@
+{
+  "ip_reputation": {
+    "198.51.100.62": {
+      "source_id": "ip:198.51.100.62",
+      "facts": [
+        "Local offline indicator record links this address to repeated remote-control callbacks from three unrelated synthetic hosts.",
+        "Address is absent from the approved remote-support endpoint list as of 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "203.0.113.84": {
+      "source_id": "ip:203.0.113.84",
+      "facts": [
+        "Synthetic identity telemetry from a second gateway records the same address attempting one password candidate across 28 accounts.",
+        "Address is absent from the synthetic authorized authentication-test ranges for 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "203.0.113.45": {
+      "source_id": "ip:203.0.113.45",
+      "facts": [
+        "Address is a shared egress point used by an approved browser-isolation service.",
+        "Reputation record has no per-client session mapping and cannot identify the originator of the sign-in attempts."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "198.51.100.27": {
+      "source_id": "ip:198.51.100.27",
+      "facts": [
+        "Synthetic network review records this endpoint issuing remote operator commands on session-09 before the archive upload.",
+        "Address is absent from approved backup and partner-transfer destinations as of 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "203.0.113.58": {
+      "source_id": "ip:203.0.113.58",
+      "facts": [
+        "Address is the configured destination for the synthetic backup service.",
+        "No incident indicators are present in the bounded offline fixture; this is not a claim about a live address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "203.0.113.19": {
+      "source_id": "ip:203.0.113.19",
+      "facts": [
+        "The bounded fixture contains no earlier records for this address.",
+        "No location or actor identity inference is available."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "198.51.100.73": {
+      "source_id": "ip:198.51.100.73",
+      "facts": [
+        "Address belongs to a shared synthetic connectivity service.",
+        "The offline record cannot distinguish travel from proxy usage."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "203.0.113.36": {
+      "source_id": "ip:203.0.113.36",
+      "facts": [
+        "Synthetic network review records remote operator control messages from this address to build-13 before the file transfer.",
+        "Address is absent from the approved package-source list as of 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "198.51.100.46": {
+      "source_id": "ip:198.51.100.46",
+      "facts": [
+        "Address is listed as an approved package distribution endpoint.",
+        "Shared distribution infrastructure can host many packages; address membership alone does not establish file trust."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.64": {
+      "source_id": "ip:192.0.2.64",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.81": {
+      "source_id": "ip:192.0.2.81",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.36": {
+      "source_id": "ip:192.0.2.36",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.44": {
+      "source_id": "ip:192.0.2.44",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.17": {
+      "source_id": "ip:192.0.2.17",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.23": {
+      "source_id": "ip:192.0.2.23",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.68": {
+      "source_id": "ip:192.0.2.68",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.72": {
+      "source_id": "ip:192.0.2.72",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.51": {
+      "source_id": "ip:192.0.2.51",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.39": {
+      "source_id": "ip:192.0.2.39",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.92": {
+      "source_id": "ip:192.0.2.92",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.86": {
+      "source_id": "ip:192.0.2.86",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.42": {
+      "source_id": "ip:192.0.2.42",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.57": {
+      "source_id": "ip:192.0.2.57",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.94": {
+      "source_id": "ip:192.0.2.94",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.28": {
+      "source_id": "ip:192.0.2.28",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.63": {
+      "source_id": "ip:192.0.2.63",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.76": {
+      "source_id": "ip:192.0.2.76",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.35": {
+      "source_id": "ip:192.0.2.35",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.49": {
+      "source_id": "ip:192.0.2.49",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.88": {
+      "source_id": "ip:192.0.2.88",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.19": {
+      "source_id": "ip:192.0.2.19",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "192.0.2.54": {
+      "source_id": "ip:192.0.2.54",
+      "facts": [
+        "Address appears only as an internal lab endpoint in this synthetic fixture.",
+        "No external reputation assertion is available for this reserved example address."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    }
+  },
+  "user_context": {
+    "analyst04": {
+      "source_id": "user:analyst04",
+      "facts": [
+        "Role is document analyst; script execution and remote support were not requested for ws-04 on 2026-11-10.",
+        "A synthetic help-desk interview records that the user opened the attachment but did not authorize the child process or remote-control session."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-inventory": {
+      "source_id": "user:svc-inventory",
+      "facts": [
+        "Noninteractive application inventory identity; authorized scope includes ws-11 and destination 192.0.2.36 during CHG-1002."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "support02": {
+      "source_id": "user:support02",
+      "facts": [
+        "The synthetic account owner confirmed they did not initiate the successful session from unregistered-device-02.",
+        "Approved authentication testing did not include this account on 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "staff15": {
+      "source_id": "user:staff15",
+      "facts": [
+        "The fixture has no user interview or client-level authentication records for this aggregated alert.",
+        "No successful sign-in is recorded in the alert window."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "admin09": {
+      "source_id": "user:admin09",
+      "facts": [
+        "Administrative identity assigned to directory maintenance.",
+        "No approved memory capture or diagnostics request exists for this identity on 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-health03": {
+      "source_id": "user:svc-health03",
+      "facts": [
+        "Service identity scoped to the installed EndpointHealth software on ws-03."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "staff14": {
+      "source_id": "user:staff14",
+      "facts": [
+        "Standard staff identity without an approved task-administration change for ws-14 on 2026-11-10.",
+        "A synthetic interview records that the user did not request the recurring task."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-update06": {
+      "source_id": "user:svc-update06",
+      "facts": [
+        "Service identity approved to maintain the PackageMaintenance task on ws-06."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-records12": {
+      "source_id": "user:svc-records12",
+      "facts": [
+        "Service identity for the synthetic records API.",
+        "Interactive operator access is outside the service identity role."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-backup01": {
+      "source_id": "user:svc-backup01",
+      "facts": [
+        "Noninteractive identity for backup-job-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "operator07": {
+      "source_id": "user:operator07",
+      "facts": [
+        "A synthetic out-of-band account-owner check confirms no requested MFA prompts or remote sign-in at the alert time.",
+        "unregistered-device-07 is absent from this account’s authorized device inventory."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "engineer10": {
+      "source_id": "user:engineer10",
+      "facts": [
+        "registered-device-10 is assigned to this account.",
+        "Travel status has not been confirmed; the fixture contains no account-owner response for the alert time.",
+        "An approved device and one MFA approval do not establish who operated the session."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "admin05": {
+      "source_id": "user:admin05",
+      "facts": [
+        "Administrative maintenance identity.",
+        "No approved protection-service change exists for this identity on app-05 during the alert window."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-upgrade16": {
+      "source_id": "user:svc-upgrade16",
+      "facts": [
+        "Service identity for approved endpoint upgrades on app-16."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "developer13": {
+      "source_id": "user:developer13",
+      "facts": [
+        "Developer identity on build-13.",
+        "No remote-support or external package exception was requested for the alert window."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "svc-package08": {
+      "source_id": "user:svc-package08",
+      "facts": [
+        "Noninteractive package-management identity authorized for package-job-16."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    }
+  },
+  "host_context": {
+    "ws-04": {
+      "source_id": "host:ws-04",
+      "facts": [
+        "Standard Windows workstation used for document review.",
+        "Inventory contains no approved remote-control agent at the Downloads child-process path.",
+        "The unsigned child process is not on the approved application inventory for 2026-11-10."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "ws-11": {
+      "source_id": "host:ws-11",
+      "facts": [
+        "Standard workstation under CHG-1002 inventory collection."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "auth-02": {
+      "source_id": "host:auth-02",
+      "facts": [
+        "Synthetic identity gateway; aggregate logs retain distinct account and password-candidate counts."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "auth-15": {
+      "source_id": "host:auth-15",
+      "facts": [
+        "Synthetic identity gateway; client identifiers were not retained in this source-address aggregate."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "directory-09": {
+      "source_id": "host:directory-09",
+      "facts": [
+        "Critical identity directory server holding privileged logon sessions.",
+        "Approved diagnostic tools do not include memory-helper.exe or the Downloads path.",
+        "The complete approved-change ledger for 2026-11-10 contains no LSASS memory-capture operation."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "ws-03": {
+      "source_id": "host:ws-03",
+      "facts": [
+        "EndpointHealth software and the observed signed executable path are installed and approved.",
+        "The configured health check queries process metadata only and is not configured to read process memory.",
+        "The alert records limited-information access, not PROCESS_VM_READ."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "ws-14": {
+      "source_id": "host:ws-14",
+      "facts": [
+        "No approved application or scheduled task uses the observed Temp action path.",
+        "The complete approved-change ledger for the alert window contains no new recurring SYSTEM task."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "ws-06": {
+      "source_id": "host:ws-06",
+      "facts": [
+        "CHG-1008 approves PackageMaintenance daily at 11:00 UTC, run as SYSTEM, with the observed signed path.",
+        "The registration time is inside the approved change window."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "records-api-12": {
+      "source_id": "host:records-api-12",
+      "facts": [
+        "Asset inventory classifies this host as critical because it serves restricted synthetic records.",
+        "No archive export, backup, or remote-operator session was approved for this host during the alert window.",
+        "Operational triage for critical assets follows the Critical asset review policy."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "backup-01": {
+      "source_id": "host:backup-01",
+      "facts": [
+        "CHG-1010 approves backup-job-10 at the alert time, using backup-agent.exe and destination 203.0.113.58.",
+        "Observed size is inside the job’s recorded 200–300 MiB expected range.",
+        "No remote operator commands are recorded for the backup session."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "access-07": {
+      "source_id": "host:access-07",
+      "facts": [
+        "Synthetic staff remote-access gateway."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "access-10": {
+      "source_id": "host:access-10",
+      "facts": [
+        "Synthetic staff remote-access gateway; no endpoint activity after sign-in is included in this fixture."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "app-05": {
+      "source_id": "host:app-05",
+      "facts": [
+        "No protection-service maintenance is approved for the alert window.",
+        "Service-management audit ties both the stop and startup-disable operations to the remote-shell process tree.",
+        "The last protection heartbeat preceded those operations; recovery is not recorded."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "app-16": {
+      "source_id": "host:app-16",
+      "facts": [
+        "CHG-1014 approves an endpoint-protection upgrade by endpoint-upgrader.exe at the alert time.",
+        "Upgrade audit records installation of the signed replacement and a running protection service two minutes after the stop.",
+        "The central console records a resumed sensor heartbeat after the upgrade."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "build-13": {
+      "source_id": "host:build-13",
+      "facts": [
+        "The remote-agent.exe parent is absent from the approved remote-support inventory.",
+        "No approved change covers the transfer or the downloaded executable.",
+        "The file was written to disk; execution is not observed in the retained telemetry."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    },
+    "build-08": {
+      "source_id": "host:build-08",
+      "facts": [
+        "CHG-1016 approves package-job-16, package-agent.exe, the observed output path and the Example Package Publisher signer.",
+        "The downloaded file hash matches the signed package manifest retained in the synthetic package inventory.",
+        "The package job is inside its approved time window."
+      ],
+      "as_of": "2026-11-10T12:00:00Z",
+      "origin": "original synthetic offline fixture"
+    }
+  }
+}

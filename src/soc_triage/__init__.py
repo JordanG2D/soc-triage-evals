@@ -1,0 +1,3 @@
+"""Synthetic SOC triage development evaluation."""
+
+__version__ = "0.1.0"

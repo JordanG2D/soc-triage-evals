@@ -1,0 +1,42 @@
+{
+  "alert_id": "A010",
+  "event_truth": "unknown",
+  "expected_verdict": "needs_escalation",
+  "severity": 3,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A010-F1",
+      "fact": "The new-location session used an assigned registered device and one approved MFA prompt.",
+      "supporting_ids": [
+        "alert:A010",
+        "user:engineer10"
+      ]
+    },
+    {
+      "id": "A010-F2",
+      "fact": "Travel and account-owner confirmation are unavailable, so authorized use versus account abuse remains unresolved.",
+      "supporting_ids": [
+        "user:engineer10"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "user_context"
+      ]
+    ],
+    "optional": [
+      "ip_reputation",
+      "host_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "A location anomaly and successful authentication are insufficient to label a valid-account attack; an assigned device also does not prove benign activity.",
+  "family_id": "remote-account-session"
+}

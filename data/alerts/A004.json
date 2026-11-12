@@ -1,0 +1,26 @@
+{
+  "id": "A004",
+  "family_id": "powershell-process",
+  "source": "endpoint_sensor",
+  "rule": "PowerShell from document application",
+  "host": "ws-04",
+  "user": "analyst04",
+  "source_ip": "192.0.2.64",
+  "destination_ip": "198.51.100.62",
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -NoProfile -File C:\\Users\\analyst04\\Downloads\\status-check.ps1",
+    "parent": "document-viewer.exe"
+  },
+  "timestamp": "2026-11-10T10:04:00Z",
+  "event": {
+    "event_type": "process_start",
+    "script_signed": false,
+    "script_observations": [
+      "Started unsigned child process from Downloads",
+      "Opened interactive remote-control channel to destination_ip"
+    ],
+    "file_origin": "Downloaded document attachment",
+    "execution_result": "completed"
+  }
+}

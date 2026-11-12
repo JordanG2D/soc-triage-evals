@@ -1,0 +1,28 @@
+{
+  "id": "A009",
+  "family_id": "process-memory-access",
+  "source": "endpoint_sensor",
+  "rule": "Process access to LSASS memory",
+  "host": "directory-09",
+  "user": "admin09",
+  "source_ip": "192.0.2.23",
+  "destination_ip": "192.0.2.68",
+  "process": {
+    "name": "memory-helper.exe",
+    "command_line": "C:\\Users\\admin09\\Downloads\\memory-helper.exe [arguments omitted]",
+    "parent": "remote-shell.exe"
+  },
+  "timestamp": "2026-11-10T10:09:00Z",
+  "event": {
+    "event_type": "process_access",
+    "target_process": "lsass.exe",
+    "requested_access": [
+      "PROCESS_VM_READ",
+      "PROCESS_QUERY_INFORMATION"
+    ],
+    "access_result": "granted",
+    "dump_file_created": "C:\\Users\\admin09\\AppData\\Local\\Temp\\process-memory.bin",
+    "process_signed": false,
+    "bytes_written": 52428800
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "alert_id": "A012",
+  "event_truth": "malicious",
+  "expected_verdict": "needs_escalation",
+  "severity": 1,
+  "acceptable_technique_ids": [
+    "T1041"
+  ],
+  "required_facts": [
+    {
+      "id": "A012-F1",
+      "fact": "A 250 MiB restricted-record canary archive was uploaded on the same session that carried remote commands and command output.",
+      "supporting_ids": [
+        "alert:A012"
+      ]
+    },
+    {
+      "id": "A012-F2",
+      "fact": "The destination issued control messages and is outside approved transfer destinations.",
+      "supporting_ids": [
+        "ip:198.51.100.27"
+      ]
+    },
+    {
+      "id": "A012-F3",
+      "fact": "The critical records host had no approved export or remote session; the critical asset policy requires incident-lead escalation for observed unauthorized data export.",
+      "supporting_ids": [
+        "host:records-api-12",
+        "RB18"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "ip_reputation"
+      ],
+      [
+        "host_context"
+      ],
+      [
+        "runbook_search"
+      ]
+    ],
+    "optional": [
+      "user_context"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Event truth is malicious and technique is evidenced. Disposition is needs_escalation under RB18 because critical-asset data export requires incident-lead decisions. This is not a claim that the attack is unknown.",
+  "family_id": "outbound-archive-stream"
+}

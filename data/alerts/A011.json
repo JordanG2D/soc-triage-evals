@@ -1,0 +1,39 @@
+{
+  "id": "A011",
+  "family_id": "powershell-process",
+  "source": "endpoint_sensor",
+  "rule": "PowerShell from management application",
+  "host": "ws-11",
+  "user": "svc-inventory",
+  "source_ip": "192.0.2.81",
+  "destination_ip": "192.0.2.36",
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -NoProfile -File C:\\ProgramData\\Inventory\\collect.ps1",
+    "parent": "inventory-agent.exe"
+  },
+  "timestamp": "2026-11-10T10:11:00Z",
+  "event": {
+    "event_type": "process_start",
+    "script_signed": true,
+    "signature_valid": true,
+    "signer": "Example Inventory Publisher",
+    "script_observations": [
+      "Enumerated installed application versions",
+      "Sent inventory to destination_ip"
+    ],
+    "change_record": {
+      "id": "CHG-1002",
+      "approved": true,
+      "host_scope": [
+        "ws-11"
+      ],
+      "user": "svc-inventory",
+      "script_path_matches": true,
+      "destination_matches": true,
+      "window_start": "2026-11-10T09:00:00Z",
+      "window_end": "2026-11-10T12:00:00Z"
+    },
+    "execution_result": "completed"
+  }
+}

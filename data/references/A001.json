@@ -1,0 +1,41 @@
+{
+  "alert_id": "A001",
+  "event_truth": "benign",
+  "expected_verdict": "benign",
+  "severity": 4,
+  "acceptable_technique_ids": [
+    null
+  ],
+  "required_facts": [
+    {
+      "id": "A001-F1",
+      "fact": "A signed backup agent uploaded an archive as backup-job-10.",
+      "supporting_ids": [
+        "alert:A001"
+      ]
+    },
+    {
+      "id": "A001-F2",
+      "fact": "The job, time, destination and size match CHG-1010; no remote commands are recorded for this session.",
+      "supporting_ids": [
+        "host:backup-01"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "ip_reputation",
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Volume and archive content alone do not establish exfiltration over C2. Matching backup authorization supports benign disposition.",
+  "family_id": "outbound-archive-stream"
+}

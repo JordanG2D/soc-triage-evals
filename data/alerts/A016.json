@@ -1,0 +1,27 @@
+{
+  "id": "A016",
+  "family_id": "security-service-state",
+  "source": "endpoint_sensor",
+  "rule": "Endpoint protection service stopped",
+  "host": "app-16",
+  "user": "svc-upgrade16",
+  "source_ip": "192.0.2.49",
+  "destination_ip": "192.0.2.88",
+  "process": {
+    "name": "endpoint-upgrader.exe",
+    "command_line": "[signed upgrade metadata]",
+    "parent": "software-agent.exe"
+  },
+  "timestamp": "2026-11-10T10:16:00Z",
+  "event": {
+    "event_type": "service_state_change",
+    "service_name": "endpoint-protection",
+    "old_state": "running",
+    "new_state": "stopped",
+    "startup_type_before": "automatic",
+    "startup_type_after": "automatic",
+    "operation_result": "success",
+    "process_signed": true,
+    "signature_valid": true
+  }
+}

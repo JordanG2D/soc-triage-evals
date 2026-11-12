@@ -1,0 +1,16 @@
+.venv/
+.cache/
+.state/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.env.*
+!.env.example
+artifacts/
+dist/
+build/
+*.sqlite3*
+*.eval
+logs/

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "scope": "Fixed expectations for 16 explicitly prewritten synthetic development fixtures, not model-performance targets. Changes require inspection, not automatic baseline refresh.",
+  "metrics": {
+    "case_count": 16,
+    "verdict_accuracy": 1.0,
+    "verdict_confusion": {
+      "true_positive": {
+        "true_positive": 7,
+        "benign": 0,
+        "needs_escalation": 0,
+        "invalid": 0
+      },
+      "benign": {
+        "true_positive": 0,
+        "benign": 6,
+        "needs_escalation": 0,
+        "invalid": 0
+      },
+      "needs_escalation": {
+        "true_positive": 0,
+        "benign": 0,
+        "needs_escalation": 3,
+        "invalid": 0
+      }
+    },
+    "mean_error_cost": 0.125,
+    "always_escalate_mean_error_cost": 1.375,
+    "always_escalate_verdict_accuracy": 0.1875,
+    "false_benign_on_malicious_count": 0,
+    "malicious_case_count": 8,
+    "invalid_output_count": 0,
+    "severity_exact_accuracy": 1.0,
+    "severity_within_one_accuracy": 1.0,
+    "severity_mae": 0.0,
+    "severity_mae_valid_count": 16,
+    "technique_accuracy": 1.0,
+    "mean_tool_requirement_coverage": 1.0,
+    "extra_tool_calls": 0,
+    "forbidden_tool_calls": 0,
+    "tool_budget_exceeded_count": 0,
+    "citation_count": 35,
+    "invalid_citation_count": 0,
+    "citation_id_validity": 1.0,
+    "required_fact_exact_text_recall": 1.0,
+    "required_fact_support_id_coverage": 1.0
+  }
+}

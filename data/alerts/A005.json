@@ -1,0 +1,26 @@
+{
+  "id": "A005",
+  "family_id": "security-service-state",
+  "source": "endpoint_sensor",
+  "rule": "Endpoint protection service stopped",
+  "host": "app-05",
+  "user": "admin05",
+  "source_ip": "192.0.2.76",
+  "destination_ip": "192.0.2.35",
+  "process": {
+    "name": "service-control-client.exe",
+    "command_line": "[service change metadata; executable arguments omitted]",
+    "parent": "remote-shell.exe"
+  },
+  "timestamp": "2026-11-10T10:05:00Z",
+  "event": {
+    "event_type": "service_state_change",
+    "service_name": "endpoint-protection",
+    "old_state": "running",
+    "new_state": "stopped",
+    "startup_type_before": "automatic",
+    "startup_type_after": "disabled",
+    "operation_result": "success",
+    "subsequent_sensor_heartbeat": "not received for 8 minutes"
+  }
+}

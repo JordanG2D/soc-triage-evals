@@ -1,0 +1,28 @@
+{
+  "id": "A003",
+  "family_id": "process-memory-access",
+  "source": "endpoint_sensor",
+  "rule": "Process access to LSASS metadata",
+  "host": "ws-03",
+  "user": "svc-health03",
+  "source_ip": "192.0.2.72",
+  "destination_ip": "192.0.2.51",
+  "process": {
+    "name": "endpoint-health.exe",
+    "command_line": "C:\\Program Files\\EndpointHealth\\endpoint-health.exe --status",
+    "parent": "service-manager"
+  },
+  "timestamp": "2026-11-10T10:03:00Z",
+  "event": {
+    "event_type": "process_access",
+    "target_process": "lsass.exe",
+    "requested_access": [
+      "PROCESS_QUERY_LIMITED_INFORMATION"
+    ],
+    "access_result": "granted",
+    "dump_file_created": null,
+    "process_signed": true,
+    "signature_valid": true,
+    "signer": "Example Endpoint Publisher"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "A010",
+  "family_id": "remote-account-session",
+  "source": "identity_gateway",
+  "rule": "Remote account session from new location",
+  "host": "access-10",
+  "user": "engineer10",
+  "source_ip": "198.51.100.73",
+  "destination_ip": "192.0.2.63",
+  "process": {
+    "name": "access-gateway",
+    "command_line": "not applicable: remote session log",
+    "parent": "service-manager"
+  },
+  "timestamp": "2026-11-10T10:10:00Z",
+  "event": {
+    "event_type": "remote_sign_in",
+    "password_result": "success",
+    "mfa_prompts": 1,
+    "mfa_result": "approved",
+    "device_id": "registered-device-10",
+    "device_registered": true,
+    "location_change": "New region relative to the last 7 days",
+    "session_established": true,
+    "resource": "staff-portal.example.invalid"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "alert_id": "A007",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1078"
+  ],
+  "required_facts": [
+    {
+      "id": "A007-F1",
+      "fact": "A valid password and approved MFA established a session from an unregistered device after seven prompts.",
+      "supporting_ids": [
+        "alert:A007"
+      ]
+    },
+    {
+      "id": "A007-F2",
+      "fact": "The account owner denies requesting those prompts or that session, and the device is outside authorized inventory.",
+      "supporting_ids": [
+        "user:operator07"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "user_context"
+      ]
+    ],
+    "optional": [
+      "ip_reputation",
+      "host_context",
+      "runbook_search"
+    ],
+    "forbidden": []
+  },
+  "max_tool_calls": 6,
+  "notes": "Credential acceptance is observed while account-owner verification establishes unauthorized use. Do not infer MFA bypass or a specific account subtype.",
+  "family_id": "remote-account-session"
+}

@@ -1,0 +1,42 @@
+{
+  "alert_id": "A014",
+  "event_truth": "malicious",
+  "expected_verdict": "true_positive",
+  "severity": 2,
+  "acceptable_technique_ids": [
+    "T1053.005"
+  ],
+  "required_facts": [
+    {
+      "id": "A014-F1",
+      "fact": "A recurring SYSTEM task configured to run every five minutes successfully executed an unsigned binary from the user Temp directory.",
+      "supporting_ids": [
+        "alert:A014"
+      ]
+    },
+    {
+      "id": "A014-F2",
+      "fact": "The task and action path have no matching approved application or change on the host.",
+      "supporting_ids": [
+        "host:ws-14"
+      ]
+    }
+  ],
+  "tool_policy": {
+    "required_any_of": [
+      [
+        "host_context"
+      ]
+    ],
+    "optional": [
+      "user_context",
+      "runbook_search"
+    ],
+    "forbidden": [
+      "ip_reputation"
+    ]
+  },
+  "max_tool_calls": 6,
+  "notes": "The completed unauthorized recurring execution supports the selected scheduled-task technique; the task name itself is not the label.",
+  "family_id": "scheduled-task-write"
+}
