@@ -1,8 +1,10 @@
 # Output-format investigation and two development runs
 
-**The initial Haiku score was dominated by a harness output-mode gap.** Both providers originally received prompt-only JSON instructions. The strict parser correctly rejected Haiku’s Markdown wrappers, but neither model had native schema enforcement enabled. After repairing that configuration for both providers and repeating the same slice, **both returned 16/16 valid structured outputs and matched 15/16 reference triage actions**.
+This project pairs an AI security-alert agent with an evaluation system that scores decisions, runs automated checks, and preserves evidence. The first run exposed a harness gap: Haiku wrapped all 16 answers in Markdown and failed the required JSON format. We fixed the harness to enforce the same JSON schema for both providers and reran the slice while preserving the original evidence. Each model then returned 16 valid outputs but matched only 15 reference decisions, with additional severity and technique errors and unnecessary tool calls. Real-world SOC performance and whether every explanation is supported by its evidence remain unvalidated.
 
-**GPT-6 Luna’s original 16/16 agreement on 16 authored development cases is not evidence of model quality.** Neither run supports a quality ranking or shipping recommendation. The full frozen family-held-out test, independent reference review, and human-calibrated faithfulness evaluation are still needed. No dataset expansion or frozen comparison has started.
+**Engineering portfolio status: complete for the authorized 16-alert slice.** Semantic faithfulness calibration is pending—not failed or completed—and is optional research rather than a completion gate. Joshua’s role is evaluation engineering and project ownership; no SOC-domain labeling obligation or analyst qualification is implied. The [current scope decision](docs/PROJECT_STATUS.md) supersedes earlier completion criteria while preserving every historical protocol and run artifact.
+
+The original prompt-only condition lacked native output enforcement for either provider. After the repair, both models produced 16/16 valid structured outputs and matched 15/16 reference actions. GPT-6 Luna’s original 16/16 agreement on authored DEV cases is not evidence of model quality. A full frozen test, independent reference review and appropriately validated semantic evaluation would be needed for stronger quality or readiness claims; none is required to recognize the completed engineering work.
 
 ## Two preserved conditions
 
@@ -111,13 +113,19 @@ R2 explicitly disables that probe path with `reasoning_summary="none"`. Its offl
 
 The durable allocation journal now counts **$10 of the lifetime $20 limit**: one nonrefundable $5 allocation per run, with unused allocation not automatically reclaimed. There is no claim that allocated dollars equal the provider bill, and historical unrecorded probe usage remains a reconciliation limit. No further paid run has been started. The current journal sets `requires_usage_reconciliation: true`; the current allocator blocks another paid allocation until historical usage is reconciled. No allocation was refunded or reset. Original R1 hidden SQLite state was omitted by the first artifact uploader; R2 retains the [actual SQLite file](evidence/vertical-slice-2026-11-12-structured-rerun/request-budget.sqlite3), a [readable export](evidence/vertical-slice-2026-11-12-structured-rerun/request-ledger.json), and the lease as well as the budget summary.
 
-## Human calibration and stop point
+## Engineering completion and optional semantic calibration
 
-The [new 20-response blank pack](evidence/vertical-slice-2026-11-12-structured-rerun/human-calibration.json) uses the same ten predeclared alerts per model and a seeded blind shuffle. The [offline review form](evidence/vertical-slice-2026-11-12-structured-rerun/label-20-responses.html) contains only actual alerts, observed tools and final responses, with every choice blank. The original run’s pack is retained separately. The coding agents did not assign or suggest the human labels.
+The engineering deliverable demonstrates real model execution, deterministic scoring, automated regression checks, evidence preservation, spending controls, failure investigation and a corrected rerun with equivalent provider output support. That milestone is complete. The project owner is not assigned the role of an independent SOC analyst or a mandatory labeling task.
 
-The judge remains **UNCALIBRATED — pending 20 human labels**. Human faithfulness review concerns support for factual claims, separate from format, reference-action correctness and completeness. Model/configuration identities are omitted where feasible, although indirect clues can remain.
+The [20-response candidate pack](evidence/vertical-slice-2026-11-12-structured-rerun/human-calibration.json) and [offline review form](evidence/vertical-slice-2026-11-12-structured-rerun/label-20-responses.html) remain unchanged and entirely unlabeled. The original run’s pack is also preserved. Historical artifacts retain their original status strings and instructions as records of the earlier plan; they do not impose the current completion criteria.
 
-The requested investigation, native-output repair and same-slice rerun are complete. The next step is human review of the evidence and calibration pack. No quality-based model recommendation is justified by either 16-case development run. Full dataset expansion, the held-out family split, prompt v2, the frozen comparison and judge calls have not started.
+**Semantic faithfulness calibration: pending, not performed; judge uncalibrated.** This is neither a failed evaluation nor a completed validation. The existing calibration checks remain safeguards against claiming human agreement without genuine review; they are not a gate on portfolio completion. No AI-generated labels have been substituted or described as human ground truth.
+
+If separately authorized, future semantic research could use an independent domain expert with a documented rubric, qualifications, label provenance and disagreement handling, or a clearly identified LLM-as-judge protocol with its model, prompts, sampling and limitations reported. Expert judgments are not automatically infallible ground truth, and automated judge scores are not human validation. Neither option is assigned, initiated or silently treated as validated truth.
+
+The reference labels remain synthetic authoring assumptions, not independently validated SOC judgments. The small DEV sample, retrieval miss, illustrative cost-metric limitation and unresolved historical probe billing remain documented limitations. There is no model-quality ranking, operational SOC-readiness claim or shipping recommendation.
+
+The [current scope decision](docs/PROJECT_STATUS.md) records the revised acceptance criteria. Additional paid runs, dataset expansion, scoring-method changes, prompt v2, the held-out split and the frozen comparison require separate authorization. The existing billing-reconciliation hold remains in place. No implementation or scoring change is part of this documentation update.
 
 ## Reproduction records
 

@@ -2,13 +2,15 @@
 
 This is a **16-alert vertical-slice development dataset**, not a held-out test set or evidence of production detection quality. All events, people, hosts, approvals, interviews, indicators, timestamps and context records are original synthetic material. No customer records, company telemetry, real credentials or attack execution were used. Recorded command lines are inert observations; omitted payloads are not executable examples.
 
+The engineering portfolio work for this slice is complete. Semantic faithfulness calibration is optional future evaluation: it has not been performed, and the judge remains uncalibrated rather than failed. Human labeling is not a condition of portfolio completion. See the owner's dated [scope and acceptance clarification](docs/PROJECT_STATUS.md).
+
 The slice includes eight behavior families, six benign events, two events whose truth remains unknown, and eight malicious events. Seven malicious events have the `true_positive` triage disposition; one requires `needs_escalation` under the critical-asset export policy. These labels are **design-time synthetic reference judgments**, not independently human-validated observations. They do not supply faithfulness-calibration labels.
 
 ## Scope and partitions
 
 All 16 cases are development material. Do not describe a sample of them, a recorded-response replay, or their family bootstrap as an independent test. The two variants of a family deliberately share behavioral assumptions and are not independent examples. Identifiers, placeholder address ranges and timestamps are not label rules.
 
-The future full dataset may use a 70/30 development/test split grouped by `family_id`, with every variant of an underlying family in one partition. That full split is **not implemented here**. Do not expand this slice to 120–150 alerts or claim a formal held-out result without separately completing that work. Ten fixed development cases can exercise a live integration without becoming a held-out benchmark: `A002`, `A004`, `A005`, `A007`, `A009`, `A010`, `A011`, `A012`, `A013`, `A014`. This selection covers all eight families, a self-contained no-tool benign event and an uncertain escalation.
+A separately authorized future evaluation could use a 70/30 development/test split grouped by `family_id`, with every variant of an underlying family in one partition. That full split is **not implemented here** and is not a condition of completing this 16-alert portfolio slice. Additional paid runs, dataset expansion, and evaluation or scoring-method changes require separate authorization. Do not expand to 120–150 alerts or claim a formal held-out result without separately completing that work. Ten fixed development cases can exercise a live integration without becoming a held-out benchmark: `A002`, `A004`, `A005`, `A007`, `A009`, `A010`, `A011`, `A012`, `A013`, `A014`. This selection covers all eight families, a self-contained no-tool benign event and an uncertain escalation.
 
 ## Files and visibility
 
@@ -63,9 +65,13 @@ The eight mappings below were checked against the linked official MITRE pages on
 
 The current Disable or Modify Tools page uses `T1685`; the historical `T1562.001` identifier is intentionally not used as a current target. This is a narrow behavior slice, not a claim of comprehensive ATT&CK coverage.
 
-## Human calibration boundary
+## Optional semantic faithfulness calibration
 
-Only a human may label the 20 faithfulness-calibration responses. Dataset references are synthetic scenario ground truth and do not replace that human task. Do not generate, infer or prefill human faithfulness labels from these references, scorer outputs or a judge model. Until the human supplies all required labels, judge calibration is pending. This dataset authoring step does not touch `judge_calibration/`.
+The retained 20-response packs provide an optional human-review path. They remain unlabeled. Semantic faithfulness calibration has not been performed; this is an uncalibrated evaluation component, not a failed engineering deliverable or a mandatory task for the project owner.
+
+Any future human-calibrated result must use actual human annotations. Dataset references are synthetic scenario judgments and cannot replace those annotations. Do not generate, infer or prefill human labels from references, scorer outputs, or a judge model. Exploratory LLM judgments, if separately authorized later, must remain clearly identified as AI assessments rather than human labels or independent ground truth.
+
+Keep existing unlabeled packs, historical protocols, and run evidence unchanged. A later review must produce a separate derived artifact with its provenance. Existing judge guards continue to prevent calibration claims without complete human review; those guards do not gate portfolio completion. This clarification changes no data, reference judgment, score, or evaluation method.
 
 ## Provenance and rights
 
