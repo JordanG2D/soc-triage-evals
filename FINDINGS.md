@@ -1,103 +1,127 @@
-# Live development vertical slice
+# Output-format investigation and two development runs
 
-> Investigation update before the repair run: the first run used prompt-only JSON instructions for both providers. Haiku's 16 parse failures do not establish 16 investigation errors. GPT-6 Luna's 16/16 agreement on 16 authored DEV cases is not evidence of quality; the full frozen test and faithfulness calibration are still needed. The $0.187791765 estimate below covers recorded triage generations and excludes unresolved automatic OpenAI probe usage. Original evidence is preserved. See [the raw-response audit](docs/format-investigation-run1.md) and [the declared repair protocol](docs/STRUCTURED_OUTPUT.md). A same-slice native-schema rerun is authorized; no dataset expansion is underway.
+**The initial Haiku score was dominated by a harness output-mode gap.** Both providers originally received prompt-only JSON instructions. The strict parser correctly rejected Haiku’s Markdown wrappers, but neither model had native schema enforcement enabled. After repairing that configuration for both providers and repeating the same slice, **both returned 16/16 valid structured outputs and matched 15/16 reference triage actions**.
 
-The first live slice completed on 2026-11-12: **16 synthetic development alerts × two models × prompt v1 = 32 actual responses**, with native Inspect JSON logs and no automatic retries. [The live workflow succeeded](https://github.com/JordanG2D/soc-triage-evals/actions/runs/43306449652); the free regression workflow also passed all 130 tests and the native 16-case recorded task.
+**GPT-6 Luna’s original 16/16 agreement on 16 authored development cases is not evidence of model quality.** Neither run supports a quality ranking or shipping recommendation. The full frozen family-held-out test, independent reference review, and human-calibrated faithfulness evaluation are still needed. No dataset expansion or frozen comparison has started.
 
-GPT-6 Luna satisfied the strict JSON contract on all 16 cases and matched all expected triage actions and severities. Haiku returned Markdown-wrapped answers on all 16 cases and therefore failed the exact-one-JSON-object contract. Its zero action/severity/technique scores include those parsing failures; the parser never reached schema validation. No answer was repaired, extracted, retried for quality, or rescored.
+## Two preserved conditions
 
-All alerts are DEV, grouped into eight authored behavior families. There is no held-out test split, second prompt, full dataset, frozen comparison, human faithfulness result, or ship recommendation.
+Both runs use the same 16 alerts, references, runbooks, embedding weights, model identifiers, application prompt v1, scorer, six-tool-call limit, five-generation limit, and 1,024-output-token limit. Run 2 changes the output protocol and disables an unrecorded OpenAI capability probe. It does not repair, extract or rescore the original answers.
 
-## Results
+| Condition | Run 1 | Run 2 |
+| --- | --- | --- |
+| Output support | Prompt-only request for bare JSON | Equivalent native JSON-schema support for both providers |
+| Live responses | 16 per model, 32 total | 16 per model, 32 total |
+| Source | `79e69aa536c8d33ebbe90f74ca5b0267ff04c8af` | `dc63b6897e4d286a8c7a318097e428ec999fa642` |
+| Workflow | [43306449652](https://github.com/JordanG2D/soc-triage-evals/actions/runs/43306449652) | [43332755718](https://github.com/JordanG2D/soc-triage-evals/actions/runs/43332755718) |
+| Evidence | [Original records and logs](evidence/vertical-slice-2026-11-12) | [Native-schema rerun records and logs](evidence/vertical-slice-2026-11-12-structured-rerun) |
 
-| Measure | GPT-6 Luna | Claude Haiku 4.5 |
-| --- | ---: | ---: |
-| Actual responses | 16 | 16 |
-| Valid structured outputs | 16/16 | 0/16 |
-| Expected triage-action accuracy | 16/16 (100%) | 0/16 (0%) |
-| Exact severity accuracy | 16/16 (100%) | 0/16 (0%) |
-| Exactly off-by-one severity rate | 0/16 | 0/16 |
-| Within-one severity accuracy | 16/16 | 0/16 |
-| Severity MAE, valid denominator | 0.0, n=16 | unavailable, n=0 |
-| Acceptable ATT&CK technique accuracy | 13/16 (81.25%) | 0/16 (0%) |
-| Required tool alternatives covered | 19/19 | 19/19 |
-| Total tool calls | 62 | 56 |
-| Extra calls, all forbidden under per-case policy | 9 | 8 |
-| Cases with forbidden tool use | 6 | 6 |
-| Tool execution errors / exceeded call cap | 0 / 0 | 0 / 0 |
-| Valid cited source IDs | 70/70 | unavailable, no parseable citations |
-| Mean illustrative event-truth error cost | 0.125 | 10.0 |
-| Always-escalate error-cost baseline | 1.375 | 1.375 |
-| False-benign decisions on malicious events | 0/8 | 0/8, with 8 invalid malicious-case outputs |
-| Standard-price token cost estimate | $0.010681 | $0.177111 |
-| Estimated mean cost per alert | $0.000668 | $0.011069 |
-| Mean end-to-end response latency | 9.28 s | 8.56 s |
-| P95 end-to-end response latency | 11.37 s | 9.63 s |
+All 11 files listed by the original SHA-256 manifest remain unchanged, as does the original manifest itself. All 32 original final strings match their native logs. The first report as originally published remains available in [Git history](https://github.com/JordanG2D/soc-triage-evals/blob/95eccb6cf1b60797f3d34cba36da2425637f3cf7/FINDINGS.md); its model-preference and total-cost interpretation are superseded by this investigation.
 
-Latency includes all generations, local tools, and parsing per alert. P95 uses linear interpolation across the 16 observed response times. Token prices are estimates from reported usage, not retrieved invoices. Total estimated cost is **$0.187791765**. The conservative request ledger charged **$0.972598**, with 150 settled generations and no pending, uncertain, or overrun reservations. The whole **$5 allocation remains counted against the lifetime $20 limit**; unused allocation is not automatically reclaimed.
+## Raw responses and diagnosis
 
-An off-by-one rate of zero for Haiku reflects invalid outputs, not valid severity estimates. Its zero false-benign count likewise reflects a lack of valid decisions. Missing and invalid cases stay in all-case accuracy denominators. Valid severity MAE and citation validity report their separate denominators.
+Three complete, unchanged original Haiku responses are available as plain text: [A001](docs/raw-run1/A001.txt), [A006](docs/raw-run1/A006.txt), and [A015](docs/raw-run1/A015.txt). They are also printed in full in [the detailed investigation](docs/format-investigation-run1.md).
 
-### Triage-action confusion matrices
+Seven Haiku responses began with `## Analysis` before a fenced JSON block. Nine began directly with a Markdown JSON fence. All 16 failed at the first character with `JSONDecodeError: Expecting value: line 1 column 1 (char 0)`. No response reached schema validation. All final generations stopped normally; none hit the token limit, and the largest final response used 682 of 1,024 available tokens.
 
-Rows are reference triage actions; columns are predicted actions. Event truth is separately retained as malicious, benign, or unknown.
+This establishes a prompt-only serialization failure, not 16 separately established investigation errors. The parser behaved according to its declared contract. There is no evidence that the initial application prompt favored OpenAI: all 32 initial system strings were identical, and all 16 paired initial alert messages and tool definitions matched. Later histories differed because of tool choices and stopping behavior. OpenAI also used `reasoning_effort="none"`, while Haiku used its default non-thinking behavior. Inspect omits disabled final tool definitions for OpenAI and retains them with tool choice disabled for Anthropic; that API-specific context difference is retained and disclosed.
 
-| GPT-6 Luna reference | true_positive | benign | needs_escalation | invalid |
+The harness was at fault for omitting available native output support and for treating that prompt-only result as a basis for model preference. Haiku’s original instruction-compliance failure remains an observation under the original condition. The records do not establish why the model chose those wrappers internally, and the content inside them has not been extracted for a replacement score.
+
+## Harness repair and proof
+
+Both providers now receive the same closed JSON schema, including the same required fields, severity/verdict enums, nullable technique ID, nested evidence structure and schema description. OpenAI uses strict Responses `text.format`; Anthropic uses current Messages `output_config.format`. The pinned Inspect version requires a provider-level request-body route for Anthropic because its generation-level extra body silently filters that field and its older schema converter rewrites scalar nodes.
+
+The shared schema inlines references and removes unsupported constraints symmetrically. The original strict local `Decision` validator remains unchanged and still checks lengths, array limits, technique pattern and all other local constraints. No fence stripping, answer repair, fallback model, relaxed scoring or quality retry was introduced.
+
+Real-SDK offline HTTP tests verify the transmitted schema dictionaries and their hash, exact system text, both ordinary and tool-disabled generation turns, nested evidence fields, and one HTTP request per reservation. The schema hash is `914ffe87ef10c4afcc0b0ee00d48c5a91ce26b837e5fd00d532a6f24be26a330`; the unchanged system-prompt hash is `500abc9bc7b001bca7a7bd3a7ebfa30fbcf9f86d466b71df1e47f03c0162d268`. Every R2 generation records that output contract. All 16 paired initial text projections also match R1.
+
+See [the protocol declared before R2](docs/STRUCTURED_OUTPUT.md) and [sanitized HTTP proof captures](docs/provider-wire-proof). The proof files are explicitly **OFFLINE_MOCK** captures of the pinned SDKs, not historical live HTTP captures. Native support follows the [OpenAI](https://developers.openai.com/api/docs/guides/structured-outputs) and [Anthropic](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) documented APIs. The repair source passed all 163 offline tests and the fixed 16-case regression before R2. The final source passes 181 checks, including the added reconciliation-hold checks before any future paid allocation. The same free suite runs in CI before any live allocation.
+
+## Results without retrospective rescoring
+
+Each cell uses all 16 cases for that model/condition. Invalid outputs remain failures in all-case accuracy. Haiku’s Run 1 zeros therefore describe the strict contract score, not an independently measured reasoning-error rate.
+
+| Measure | R1 GPT-6 Luna | R1 Haiku 4.5 | R2 GPT-6 Luna | R2 Haiku 4.5 |
+| --- | ---: | ---: | ---: | ---: |
+| Valid structured outputs | 16/16 | 0/16 | 16/16 | 16/16 |
+| Reference triage-action matches | 16/16 | 0/16 | 15/16 | 15/16 |
+| Exact reference severity | 16/16 | 0/16 | 15/16 | 9/16 |
+| Exactly off-by-one severity | 0/16 | 0/16 invalid | 1/16 | 7/16 |
+| Within-one severity | 16/16 | 0/16 | 16/16 | 16/16 |
+| Severity MAE, valid denominator | 0.0, n=16 | unavailable, n=0 | 0.0625, n=16 | 0.4375, n=16 |
+| Acceptable technique ID | 13/16 | 0/16 | 14/16 | 12/16 |
+| Required tool alternatives covered | 19/19 | 19/19 | 19/19 | 19/19 |
+| Total tool calls | 62 | 56 | 64 | 53 |
+| Forbidden/extra tool calls | 9 | 8 | 12 | 4 |
+| Cases with forbidden calls | 6 | 6 | 7 | 4 |
+| Tool execution errors / cap breaches | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| Valid cited source IDs | 70/70 | unavailable | 66/66 | 108/108 |
+| Mean illustrative event-truth cost | 0.125 | 10.0 | 0.0 | 0.0 |
+| Mean end-to-end latency | 9.28 s | 8.56 s | 8.73 s | 6.81 s |
+| P95 end-to-end latency | 11.37 s | 9.63 s | 10.10 s | 9.33 s |
+| Recorded triage token-price estimate | $0.010680765* | $0.177111 | $0.010030065 | $0.184206 |
+
+*The R1 OpenAI amount excludes unresolved capability-probe usage, as explained below. None of these estimates is a retrieved invoice. Latency covers all provider generations, local tools and parsing for one alert; R1 OpenAI latency can also include the probe path. P95 uses linear interpolation. Latency and cost changes cannot be attributed solely to the output schema: tool trajectories, removed probe overhead, provider formatting effects and ordinary sampling/network variation also changed.
+
+### Action confusion matrices
+
+Run 1 GPT-6 Luna placed all seven `true_positive`, six `benign` and three `needs_escalation` references on their diagonal. Run 1 Haiku placed the same 7/6/3 reference groups in `invalid`. The original report files retain those matrices.
+
+Both R2 models produced the same following matrix:
+
+| Reference action | true_positive | benign | needs_escalation | invalid |
 | --- | ---: | ---: | ---: | ---: |
 | true_positive | 7 | 0 | 0 | 0 |
 | benign | 0 | 6 | 0 | 0 |
-| needs_escalation | 0 | 0 | 3 | 0 |
+| needs_escalation | 1 | 0 | 2 | 0 |
 
-| Haiku reference | true_positive | benign | needs_escalation | invalid |
-| --- | ---: | ---: | ---: | ---: |
-| true_positive | 0 | 0 | 0 | 7 |
-| benign | 0 | 0 | 0 | 6 |
-| needs_escalation | 0 | 0 | 0 | 3 |
+### Remaining observed failures
 
-The predeclared cost table penalizes a benign decision on a malicious event at 10 and assigns invalid actions a cost of 10. The malicious critical-export case correctly requires escalation under lab policy, which carries a cost of 2 in the illustrative event-truth table even when the expected triage action is matched. Costs are declared policy weights, not measured business losses.
+**Policy retrieval:** both R2 models returned `true_positive` for A012, while the reference requires `needs_escalation` for unauthorized data export from a critical asset. Both assigned severity 1. Neither actually received the required policy runbook RB18: OpenAI retrieved RB02/RB04/RB13 and Haiku retrieved RB12/RB13. The host context names a critical-asset review policy as a retrieval breadcrumb but does not state its escalation rule. In R1, only GPT-6 Luna on A012 actually received RB18 and matched the policy action; no R1 Haiku response or any R2 response received RB18. The models issued different searches across trajectories. This is an end-to-end policy-retrieval failure, not evidence that either model ignored a policy it saw. It also shows why 19/19 required tool alternatives does not establish successful retrieval of required evidence. Retrieval recall and policy clarity need review before the full protocol is frozen; no such tuning was performed during this repair.
 
-## Failure modes and examples
+**Severity:** GPT-6 Luna assigned A013 severity 3 rather than reference 2. Haiku’s seven mismatches were all one level more urgent than the reference: A002/A004/A005/A007/A013/A014 received 1 rather than 2; A010 received 2 rather than 3. These are descriptive reference-label differences on DEV, not independently validated operational error rates.
 
-**Output-contract failure:** all 16 Haiku answers failed JSON decoding at the first character. Seven began with `## Analysis` and later included a fenced JSON block; nine began directly with a Markdown JSON fence. For example, A001 begins with an analysis section rather than the required JSON object. These are contract failures; this run does not establish separate reasoning-error rates for the embedded fields. All 16 final generations stopped normally; no length-limit stop was observed, and the largest final response used 682 of 1,024 available output tokens. Original responses remain unchanged.
+**Technique selection:** GPT-6 Luna used T1219 instead of T1059.001 on A004 and historical T1562.001 instead of current T1685 on A005. Haiku also used T1562.001 on A005, T1078.004 rather than the accepted T1078 on A007, T1020 rather than T1041 on A012, and T1110.003 rather than `null` on A015. Technique scoring uses the unchanged declared acceptable sets; no taxonomy-based partial credit was added after observing results.
 
-**Technique over-attribution or taxonomy mismatch:** three GPT-6 Luna technique IDs fall outside the declared acceptable set. For A006, an approved maintenance task is correctly classified as benign with severity 4, but the model assigns `T1053.005` while the reference permits `null`. The other two mismatches were `T1219` in place of PowerShell `T1059.001`, and the historical `T1562.001` in place of the current `T1685` target. This exposes both technique selection and taxonomy-version sensitivity under the lab's labeling rule.
+**Tool waste:** GPT-6 Luna used 12 forbidden calls in seven cases, including all four tools on the self-contained no-tool A011 case. Haiku used four forbidden calls in four cases. Both covered every required alternative and had no execution errors or tool-cap violations. Repeated tool names can refer to different IP arguments and are not automatically identical duplicate requests.
 
-**Unnecessary investigation:** both models covered all required tool alternatives but used forbidden tools in six cases. GPT-6 Luna made nine such calls; Haiku made eight. A006's GPT-6 Luna trace includes an unnecessary `ip_reputation` lookup. The self-contained benign scenario exercises whether a model can stop without looking up more context. Repeated tool names can involve different arguments; the reported name-repeat count is not proof of duplicate identical requests.
+**Metric limitation:** zero R2 event-truth cost does not mean zero action errors. The illustrative matrix assigns malicious→`true_positive` zero, but the required A012 escalation costs two. Thus it does not penalize this policy-action mismatch and cannot be used alone as an overall quality or shipping measure. The action score remains 15/16. The matrix is preserved rather than changed retrospectively; its intended scope needs review before the full evaluation is frozen.
 
-**Mechanical evidence checks:** GPT-6 Luna's 70 citation IDs were all actually exposed, but source-ID validity does not establish support for the associated claims. Exact reference-fact string overlap is zero despite valid decisions, illustrating why lexical matching is reported only as a mechanical diagnostic. No semantic faithfulness grades have been assigned.
+Citation IDs establish only that a source was actually exposed. They do not establish that a claim follows from it. No semantic faithfulness grades or human labels have been assigned.
 
-## Exploratory paired uncertainty
+## Paired uncertainty and interpretation
 
-The predeclared paired percentile bootstrap resamples whole families, preserving each alert's model pair and within-family variants: eight families, 16 pairs, 2,000 resamples, seed 1729, 95% intervals. Differences below are **Haiku minus GPT-6 Luna**.
+The existing paired percentile bootstrap resamples whole families, retaining paired alerts and within-family variants: eight families, 16 pairs, 2,000 resamples, seed 1729, 95% intervals. Differences below are Haiku minus GPT-6 Luna.
 
-| Paired measure | Observed difference | 95% family-bootstrap interval |
-| --- | ---: | --- |
-| Expected-action accuracy | -1.000 | [-1.000, -1.000] |
-| Mean illustrative error cost | +9.875 | [9.625, 10.000] |
+| Paired measure | R1 difference and interval | R2 difference and interval |
+| --- | --- | --- |
+| Reference-action accuracy | -1.000, [-1.000, -1.000] | 0.000, [0.000, 0.000] |
+| Mean event-truth cost | +9.875, [9.625, 10.000] | 0.000, [0.000, 0.000] |
 
-The intervals exclude zero for these contract-based scores on this sample. The degenerate accuracy interval occurs because every observed pair has the same difference. These intervals resample the eight authored DEV families; they do not establish general model dominance, future precision, operational security performance, or human-judged faithfulness. Only one generation trajectory per alert/configuration was observed.
+R1’s large difference was dominated by the prompt-only formatting contract. R2’s degenerate intervals arise because every pair has the same assigned action/cost scores. They establish neither general model equivalence nor a quality ranking. Severity and technique counts above are descriptive; no new significance claim is made. These are authored DEV families, not the future full test split. Each condition has one trajectory per alert, with no controlled replication to separate schema effects from response variability.
 
-## Human calibration handoff
+## Request accounting and historical cost correction
 
-The [20-response blank pack](evidence/vertical-slice-2026-11-12/human-calibration.json) contains the ten cases declared before the run for each model, followed by a seeded blind shuffle. It omits model/configuration identities where feasible and includes only the alert, actual observed tools, and final response. Indirect clues can remain in outputs. The downloadable [offline review form](evidence/vertical-slice-2026-11-12/label-20-responses.html) starts with no choices selected and downloads the human's completed JSON after all 20 choices, reasons, and a reviewer name are entered. No AI labels or suggested grades are supplied.
+The pinned OpenAI adapter can make an automatic greeting generation to detect reasoning-summary support when that setting is unset. Its probe omits an explicit output cap, and its usage is absent from the returned triage-generation usage. A reproduction of the old configuration produced three SDK POSTs for two requested generations/reservations; the extra call was the probe. A successful or deterministic rejection is cached within a provider instance, while a transient error can allow another attempt. The original agent created a fresh provider instance per alert.
 
-The faithfulness judge is **UNCALIBRATED — pending 20 human labels**. Judge generation refuses incomplete human review, and agreement remains unset. This handoff does not ask the reviewer to relabel operational correctness or repair JSON; the written rubric assesses support for material factual claims in the actual displayed evidence.
+This proves the old code path, not the exact number or cost of historical live probes. Original live HTTP logs and an account invoice were not retained. **The earlier $0.187791765 figure covers recorded triage generations only and must not be called the complete bill.** The recorded R1 request-accounting ceiling of $0.972598 likewise excludes unresolved probe usage. Original budget evidence remains unchanged.
 
-## Recommendation and checkpoint
+R2 explicitly disables that probe path with `reasoning_summary="none"`. Its offline SDK tests show one HTTP request per reserved generation for both providers. The retained R2 SQLite ledger passes integrity checks and contains **149 settled reservations** (80 OpenAI, 69 Anthropic), matching all recorded usage and the 32 per-case charges. There are no pending, uncertain or bound-violation rows. The conservative charged ceiling is **$1.085740**; the standard-price recorded token estimate is **$0.194236065**. Both remain distinct from provider billing.
 
-Use GPT-6 Luna as the next development baseline. The next proposed engineering iteration should enforce or improve Haiku's output contract and reduce unnecessary tools, with any new prompt/version declared before another run. These are recommendations for review, not changes made after seeing results. **Neither configuration is ready for a shipping recommendation.** Synthetic references have not received independent domain validation, and faithfulness calibration is pending.
+The durable allocation journal now counts **$10 of the lifetime $20 limit**: one nonrefundable $5 allocation per run, with unused allocation not automatically reclaimed. There is no claim that allocated dollars equal the provider bill, and historical unrecorded probe usage remains a reconciliation limit. No further paid run has been started. The current journal sets `requires_usage_reconciliation: true`; the current allocator blocks another paid allocation until historical usage is reconciled. No allocation was refunded or reset. Original R1 hidden SQLite state was omitted by the first artifact uploader; R2 retains the [actual SQLite file](evidence/vertical-slice-2026-11-12-structured-rerun/request-budget.sqlite3), a [readable export](evidence/vertical-slice-2026-11-12-structured-rerun/request-ledger.json), and the lease as well as the budget summary.
 
-The authorized vertical slice stops here. Dataset expansion, a 70/30 family-held-out split, prompt v2, the frozen two-prompt comparison, judge calls, and further paid runs have not started.
+## Human calibration and stop point
 
-## Reproduction and evidence
+The [new 20-response blank pack](evidence/vertical-slice-2026-11-12-structured-rerun/human-calibration.json) uses the same ten predeclared alerts per model and a seeded blind shuffle. The [offline review form](evidence/vertical-slice-2026-11-12-structured-rerun/label-20-responses.html) contains only actual alerts, observed tools and final responses, with every choice blank. The original run’s pack is retained separately. The coding agents did not assign or suggest the human labels.
 
-- Live source: [`79e69aa536c8d33ebbe90f74ca5b0267ff04c8af`](https://github.com/JordanG2D/soc-triage-evals/tree/79e69aa536c8d33ebbe90f74ca5b0267ff04c8af).
-- [Workflow run](https://github.com/JordanG2D/soc-triage-evals/actions/runs/43306449652), run/attempt `43306449652:1`; [durable allocation commit](https://github.com/JordanG2D/soc-triage-evals/commit/226e9ba6a60349fb5ad5de35e5da069cc1f11df6).
-- Returned model identities: `gpt-6-luna` and `claude-haiku-4-5-20251001`. The OpenAI name is an alias, so exact provider-weight reproducibility is limited.
-- [32 original response records](evidence/vertical-slice-2026-11-12/records.jsonl), [OpenAI report](evidence/vertical-slice-2026-11-12/openai/report.json), [Anthropic report](evidence/vertical-slice-2026-11-12/anthropic/report.json), [paired statistics](evidence/vertical-slice-2026-11-12/paired-dev-comparison.json), and [budget summary](evidence/vertical-slice-2026-11-12/budget.json).
-- Native Inspect JSON logs are retained under [the evidence directory](evidence/vertical-slice-2026-11-12/inspect), with a [SHA-256 manifest](evidence/vertical-slice-2026-11-12/manifest.json). Source/input hashes and actually exposed evidence are retained in original records.
-- Python 3.12, Inspect AI 0.3.287; complete dependencies in `uv.lock`, embedding revision/checksums in `config/embedding.json`, and compatibility notes in [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md).
+The judge remains **UNCALIBRATED — pending 20 human labels**. Human faithfulness review concerns support for factual claims, separate from format, reference-action correctness and completeness. Model/configuration identities are omitted where feasible, although indirect clues can remain.
 
-The original artifact uploader omitted the hidden SQLite state directory. The durable repository allocation, budget summary, and all 150 usage events are retained; their conservative charges reconstruct the $0.972598 total. The workflow now explicitly retains hidden state in future manual runs.
+The requested investigation, native-output repair and same-slice rerun are complete. The next step is human review of the evidence and calibration pack. No quality-based model recommendation is justified by either 16-case development run. Full dataset expansion, the held-out family split, prompt v2, the frozen comparison and judge calls have not started.
 
-Later changes to the review-form presentation, the reporting display of exactly-off-by-one severity, or hidden-file artifact retention do not change the frozen agent, prompts, cases, scores, or original live evidence from this run. Reproduce the offline fixture checks with `bash scripts/evaluate.sh`; they validate pipeline mechanics and are not model-quality results.
+## Reproduction records
+
+- [R1 manifest](evidence/vertical-slice-2026-11-12/manifest.json), [original responses](evidence/vertical-slice-2026-11-12/records.jsonl), and [original per-model reports](evidence/vertical-slice-2026-11-12).
+- [R2 manifest](evidence/vertical-slice-2026-11-12-structured-rerun/manifest.json), [new responses](evidence/vertical-slice-2026-11-12-structured-rerun/records.jsonl), [OpenAI report](evidence/vertical-slice-2026-11-12-structured-rerun/openai/report.json), [Haiku report](evidence/vertical-slice-2026-11-12-structured-rerun/anthropic/report.json), and [paired statistics](evidence/vertical-slice-2026-11-12-structured-rerun/paired-dev-comparison.json).
+- Both use returned model identities `gpt-6-luna` and `claude-haiku-4-5-20251001`. The former is an alias, limiting exact weight reproducibility.
+- Python 3.12, Inspect AI 0.3.287; unchanged dependencies in `uv.lock`, embedding checksums in `config/embedding.json`, [runtime notes](docs/DEPENDENCIES.md), and offline reproduction command `bash scripts/evaluate.sh`.

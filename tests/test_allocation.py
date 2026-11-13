@@ -77,6 +77,42 @@ def test_main_commits_request_before_writing_local_lease(workflow, monkeypatch):
     assert remote.journal["allocations"] == [{key: value for key, value in lease.items() if key != "journal_commit"}]
 
 
+def test_usage_reconciliation_hold_refuses_before_journal_or_lease_mutation(workflow, monkeypatch):
+    remote = FakeGitHub(workflow, [entry("100:1"), entry("101:1")])
+    remote.journal["requires_usage_reconciliation"] = True
+    original = deepcopy(remote.journal)
+    monkeypatch.setattr(allocator, "api", remote)
+    with pytest.raises(ValueError, match="Historical provider usage requires reconciliation"):
+        allocator.main()
+    assert [method for method, _ in remote.calls] == ["GET"]
+    assert remote.journal == original
+    assert not remote.destination.exists()
+    assert not remote.destination.parent.exists()
+
+
+def test_explicit_false_reconciliation_hold_keeps_normal_allocation_path(workflow, monkeypatch):
+    remote = FakeGitHub(workflow)
+    remote.journal["requires_usage_reconciliation"] = False
+    monkeypatch.setattr(allocator, "api", remote)
+    allocator.main()
+    assert [method for method, _ in remote.calls] == ["GET", "PUT"]
+    assert remote.journal["requires_usage_reconciliation"] is False
+    assert json.loads(remote.destination.read_text())["run_id"] == "105:1"
+
+
+@pytest.mark.parametrize("hold", [None, 0, 1, "true", []])
+def test_invalid_reconciliation_hold_rejected_before_remote_mutation(workflow, monkeypatch, hold):
+    remote = FakeGitHub(workflow)
+    remote.journal["requires_usage_reconciliation"] = hold
+    original = deepcopy(remote.journal)
+    monkeypatch.setattr(allocator, "api", remote)
+    with pytest.raises(ValueError, match="requires_usage_reconciliation must be a boolean"):
+        allocator.main()
+    assert [method for method, _ in remote.calls] == ["GET"]
+    assert remote.journal == original
+    assert not remote.destination.exists()
+
+
 def test_cas_rejection_never_issues_local_lease(workflow, monkeypatch):
     remote = FakeGitHub(workflow, put_error=HTTPError("https://example.invalid", 409, "CAS conflict", {}, None))
     monkeypatch.setattr(allocator, "api", remote)

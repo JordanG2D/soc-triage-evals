@@ -1,0 +1,26 @@
+{
+  "run_id": "43332755718:1",
+  "run_url": "https://github.com/JordanG2D/soc-triage-evals/actions/runs/43332755718",
+  "execution_mode": "live_model",
+  "scope": "same16syntheticDEVcases; unchangedpromptv1;native-json-schema-v1; nofrozen test orhumanlabels",
+  "source_commit": "dc63b6897e4d286a8c7a318097e428ec999fa642",
+  "journal_commit": "e4f6e5b8404e5cd274aa0f75a0ec3ce80dc64750",
+  "original_run1_evidence": "../vertical-slice-2026-11-12",
+  "human_labels": "all20blank",
+  "files": {
+    "anthropic/FINDINGS.md": "d62f9c2b4f073dfe237ce9574e5966020a3fe64dead9235f67ee3af8d7d121ec",
+    "anthropic/report.json": "af057d070ac31e05bd376878fd604657285104c8f77479ea81519ffeb53a7df6",
+    "budget.json": "b40f54c4232f3398533b0a50ead692849bc4a351bbd97e7637208a1a834e565a",
+    "human-calibration.json": "4e8a95c676e64d7fee9e65b84216552606b9421b8b87f5b32ed36d2e4d55523d",
+    "inspect/anthropic/2026-11-12T23-57-26-00-00_task_gqDKYQRhCPFc9h5Bb24okY.json": "1bcadae2d974fc4d292fbfa6ecc708eb23f5964153222c026d8bda1958c22213",
+    "inspect/openai/2026-11-12T23-55-04-00-00_task_TMZb2Wwt4FDeSYyHesNhpo.json": "1d444652287478324411783e8d26ca43ddaa6cb055d157e00231a643d1d4bdbc",
+    "label-20-responses.html": "adb3c342a3f6c7d2e3ed7ccfc9f900292e474f5ddb27ccd88fcfe6880767ac11",
+    "live-lease.json": "57594368a60097544a07da77dd4b6c28f1ac33c977bdb943712eda76a4a77a20",
+    "openai/FINDINGS.md": "dce2608d34faf1b7d6731bf317d00d730d71e738f77ed5dcee0d1adb9743788f",
+    "openai/report.json": "a0db0c9d84d138c8731c464dc757fdbaae33bf3462bc3a29a880bba0c6437510",
+    "paired-dev-comparison.json": "c06df425ddc0ba75317c4be02de727949e1381f1d08d67d03672c2ff9b6c6fc1",
+    "records.jsonl": "0a188eb3f2ec497fdfbbb0750c4e69fd9f81d1811d19a3efee6e561473551bf5",
+    "request-budget.sqlite3": "fbf4cc276ee97eeaa9aaa5d7d939782445b51d8ab21bd57cfa64a91de40324b6",
+    "request-ledger.json": "0cdb6c5f30614e05a38e64831a8d3c8618c25661db5386dcc28e09d2d3b746eb"
+  }
+}

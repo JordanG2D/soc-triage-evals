@@ -269,6 +269,22 @@ def test_journal_counts_optional_metadata_and_orphan_allocations():
     assert validate_journal({"schema_version": 1, "cap_microdollars": 20_000_000, "allocations": []}) == 0
 
 
+@pytest.mark.parametrize("hold", [False, True])
+def test_journal_validates_boolean_reconciliation_hold_without_erasing_allocations(hold):
+    journal = {"schema_version": 1, "cap_microdollars": 20_000_000,
+               "allocations": [{"run_id": "100:1", "microdollars": 5_000_000}],
+               "requires_usage_reconciliation": hold}
+    assert validate_journal(journal) == 5_000_000
+    assert journal["requires_usage_reconciliation"] is hold
+
+
+@pytest.mark.parametrize("hold", [None, 0, 1, 0.0, 1.0, "true", "false", [], {}])
+def test_journal_rejects_nonboolean_reconciliation_hold(hold):
+    with pytest.raises(ValueError, match="requires_usage_reconciliation must be a boolean"):
+        validate_journal({"schema_version": 1, "cap_microdollars": 20_000_000,
+                          "allocations": [], "requires_usage_reconciliation": hold})
+
+
 @pytest.mark.parametrize("journal", [
     None, [], {},
     {"schema_version": True, "cap_microdollars": 20_000_000, "allocations": []},

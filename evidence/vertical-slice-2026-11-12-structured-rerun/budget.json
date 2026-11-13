@@ -1,0 +1,14 @@
+{
+  "lease_id": "43332755718:1",
+  "cap_microdollars": 5000000,
+  "charged_upper_microdollars": 1085740,
+  "remaining_microdollars": 3914260,
+  "halted": false,
+  "states": {
+    "settled": {
+      "count": 149,
+      "charge_microdollars": 1085740
+    }
+  },
+  "interpretation": "Conservative accounting ceiling; not a provider invoice. Pending and uncertain calls retain their full reservation."
+}

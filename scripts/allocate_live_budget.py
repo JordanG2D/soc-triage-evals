@@ -38,6 +38,8 @@ def main() -> None:
     remote = api("GET")
     journal = json.loads(base64.b64decode(remote["content"]))
     used = validate_journal(journal)
+    if journal.get("requires_usage_reconciliation", False):
+        raise ValueError("Historical provider usage requires reconciliation before new paid allocations; the allocation journal does not establish total account spend")
     if any(entry["run_id"] == run_id for entry in journal["allocations"]):
         raise ValueError("Run already allocated; refusing to reuse a potentially spent lease")
     if used + ALLOCATION > CAP:

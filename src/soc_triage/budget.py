@@ -51,7 +51,7 @@ def validate_journal(journal: object) -> int:
     """
     if not isinstance(journal, dict):
         raise ValueError("Budget journal must be an object")
-    allowed = {"schema_version", "cap_microdollars", "allocations", "metadata"}
+    allowed = {"schema_version", "cap_microdollars", "allocations", "metadata", "requires_usage_reconciliation"}
     if set(journal) - allowed:
         raise ValueError("Unknown budget journal fields")
     if type(journal.get("schema_version")) is not int or journal["schema_version"] != 1:
@@ -60,6 +60,8 @@ def validate_journal(journal: object) -> int:
         raise ValueError("Budget journal must retain the exact lifetime $20 cap")
     if "metadata" in journal and not isinstance(journal["metadata"], dict):
         raise ValueError("Budget journal metadata must be an object")
+    if type(journal.get("requires_usage_reconciliation", False)) is not bool:
+        raise ValueError("requires_usage_reconciliation must be a boolean")
     entries = journal.get("allocations")
     if not isinstance(entries, list):
         raise ValueError("Missing budget allocation history")
